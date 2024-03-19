@@ -1,8 +1,17 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <limits.h>
 #include "Phonebook.hpp"
 #include "Contact.hpp"
+
+Phonebook::Phonebook()
+{
+}
+
+Phonebook::~Phonebook()
+{
+}
 
 static bool	parse_attempt(int& index, std::string& search)
 {
@@ -18,16 +27,17 @@ static bool	parse_attempt(int& index, std::string& search)
 	return (true);
 }
 
-void	Phonebook::add_contact(void)
+void	Phonebook::add_contact()
 {
-	int i = 0;
-
-	while (entries[i].index != 0)
-		i++;
+	static int i = 0;
+	
 	entries[i].get_info(i + 1);
+	i++;
+	if (i == 8)
+		i = 0;
 }
 
-void	Phonebook::search_contact(void)
+void	Phonebook::search_contact()
 {
 	std::string search;
 	int	index = 0;
@@ -41,7 +51,7 @@ void	Phonebook::search_contact(void)
 		this->entries[i].show_index();
 	}
 	std::cout << "\nPlease choose which contact to display" << std::endl;
-	std::cin.ignore(std::numeric_limits<std::streamsize>std::max(), '\n');
+	std::cin.ignore(LLONG_MAX, '\n');
 	while (index == 0)
 	{
 		getline(std::cin, search);
@@ -50,6 +60,3 @@ void	Phonebook::search_contact(void)
 	this->entries[index - 1].show_contact();
 }
 
-Phonebook::Phonebook(void)
-{
-}

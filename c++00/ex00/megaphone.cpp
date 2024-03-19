@@ -9,7 +9,7 @@ std::string&	ShoutInput(std::string &input)
 	return (input);
 }
 
-int32_t	main(int argc, char** argv)
+int	main(int argc, char** argv)
 {
 	std::string input;
 

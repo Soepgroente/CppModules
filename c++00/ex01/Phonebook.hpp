@@ -12,6 +12,7 @@ class Phonebook
 	void	search_contact();
 	void	add_contact();
 	Phonebook();
+	~Phonebook();
 };
 
 #endif

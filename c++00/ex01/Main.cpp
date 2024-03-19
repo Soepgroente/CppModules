@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <limits.h>
 #include "Phonebook.hpp"
 #include "Contact.hpp"
 

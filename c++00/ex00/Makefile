@@ -1,20 +1,24 @@
 NAME	= megaphone
 RM		= rm -rf
 CC		= c++
-CFLAGS	= -Wall -Werror -Wextra -std=c++98 #-g3 -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra -std=c++11 #-g3 -fsanitize=address
 SRCS	= megaphone.cpp
-OBJS	= $(SRCS:%.cpp=%.o)
+OBJS	= $(SRCS:%.cpp=$(OBJDIR)/%.o)
+OBJDIR	= megaphobj
 
 all:	$(NAME)
 
-%.o : %.cpp
-	$(CC) -c $(CFLAGS) -o $@ $^
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJDIR) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
+$(OBJDIR)/%.o : %.cpp
+	$(CC) -c $(CFLAGS) -o $@ $^
+
 clean:	
-	$(RM) $(OBJS)
+	$(RM) $(OBJDIR)
 
 fclean: clean
 	$(RM) $(NAME)

@@ -1,7 +1,7 @@
 NAME	=	Phonebook
 RM		=	rm -rf
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++11 #-g3 -fsanitize=address
+CFLAGS	=	-Wall -Werror -Wextra -std=c++11 -g #-fsanitize=address
 HEADERS	=	-I/Contact.hpp -I/Phonebook.hpp
 SRCS	=	Contact.cpp \
 			Main.cpp \

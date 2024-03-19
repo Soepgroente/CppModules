@@ -1,12 +1,27 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <limits.h>
 #include "Phonebook.hpp"
 #include "Contact.hpp"
 
-static std::string	truncate_field(std::string input)
+Contact::Contact()
 {
-	size_t		max_len = 10;
+	FirstName = "";
+	LastName = "";
+	NickName = "";
+	PhoneNumber = "";
+	DarkestSecret = "";
+	index = 0;
+}
+
+Contact::~Contact()
+{
+}
+
+std::string	Contact::truncate_field(std::string& input)
+{
+	const size_t	max_len = 10;
 
 	if (input.length() > max_len)
 		return (input.substr(0, max_len - 1) + ".");
@@ -36,28 +51,23 @@ void Contact::show_index()
 	std::cout << std::setw(10) << std::right << truncate_field(this->NickName) << "|" << std::endl;
 }
 
+std::string	Contact::prompt(std::string prompt)
+{
+	std::string	answer;
+
+	std::cout << prompt << std::endl;
+	getline(std::cin, answer);
+	return (answer);
+}
+
 void	Contact::get_info(int in)
 {
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	std::cout << "Please write your first name:" << std::endl;
-	getline(std::cin, this->FirstName);
-	std::cout << "Please write your last name:" << std::endl;
-	getline(std::cin, this->LastName);
-	std::cout << "Please insert a nickname:" << std::endl;
-	getline(std::cin, this->NickName);
-	std::cout << "Please insert your phone number:" << std::endl;
-	getline(std::cin, this->PhoneNumber);
-	std::cout << "Please tell me your darkest secret:" << std::endl;
-	getline(std::cin, this->DarkestSecret);
+	std::cin.ignore(LLONG_MAX, '\n');
+	FirstName = this->prompt("Please write your first name:");
+	LastName = this->prompt("Please write your last name:");
+	NickName = this->prompt("Please write a nickname:");
+	PhoneNumber = this->prompt("Please insert your phone number:");
+	DarkestSecret = this->prompt("Please share your darkest secret:");
 	this->index = in;
 }
 
-Contact::Contact()
-{
-	FirstName = "";
-	LastName = "";
-	NickName = "";
-	PhoneNumber = "";
-	DarkestSecret = "";
-	index = 0;
-}
