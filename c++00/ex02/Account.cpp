@@ -73,12 +73,12 @@ void	Account::displayAccountsInfos(void)
 
 void	Account::makeDeposit(int deposit)
 {
+	_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex << ";p_amount:" << this->_amount << ";deposit:" << deposit;
 	this->_amount += deposit;
 	this->_nbDeposits++;
 	_totalAmount += deposit;
 	_totalNbDeposits++;
-	_displayTimestamp();
-	std::cout << "index:" << this->_accountIndex << ";deposit:" << deposit;
 	std::cout << ";amount:" << this->_amount << ";nb_deposits:" << this->_nbDeposits << std::endl;
 }
 
