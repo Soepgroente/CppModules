@@ -16,10 +16,9 @@
 //                               Account Class                                //
 // ************************************************************************** //
 
-class Account {
-
-
-public:
+class Account
+{
+	public:
 
 	typedef Account		t;
 
@@ -38,7 +37,7 @@ public:
 	void	displayStatus( void ) const;
 
 
-private:
+	private:
 
 	static int	_nbAccounts;
 	static int	_totalAmount;
@@ -47,23 +46,12 @@ private:
 
 	static void	_displayTimestamp( void );
 
-	int				_accountIndex;
-	int				_amount;
-	int				_nbDeposits;
-	int				_nbWithdrawals;
+	int		_accountIndex;
+	int		_amount;
+	int		_nbDeposits;
+	int		_nbWithdrawals;
 
 	Account( void );
-
 };
 
-
-
-// ************************************************************************** //
-// vim: set ts=4 sw=4 tw=80 noexpandtab:                                      //
-// -*- indent-tabs-mode:t;                                                   -*-
-// -*- mode: c++-mode;                                                       -*-
-// -*- fill-column: 75; comment-column: 75;                                  -*-
-// ************************************************************************** //
-
-
-#endif /* __ACCOUNT_H__ */
+#endif

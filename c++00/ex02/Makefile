@@ -1,14 +1,13 @@
-NAME	=	Phonebook
+NAME	=	Account
 RM		=	rm -rf
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98 #-g3 -fsanitize=address
-HEADERS	=	-I/Contact.hpp -I/Phonebook.hpp
-SRCS	=	Contact.cpp \
-			Main.cpp \
-			Phonebook.cpp \
+CFLAGS	=	-Wall -Werror -Wextra -std=c++11 -g #-fsanitize=address
+HEADERS	=	-I/Account.hpp
+SRCS	=	tests.cpp \
+			Account.cpp \
 
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)
-OBJDIR	=	objbook
+OBJDIR	=	Accobj
 
 all:	$(NAME)
 
