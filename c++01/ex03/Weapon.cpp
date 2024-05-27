@@ -14,8 +14,9 @@ Weapon::Weapon()
 {
 }
 
-Weapon::Weapon(std::string name) : type(name)
+Weapon::Weapon(std::string name)
 {
+	this->type = name;
 }
 
 Weapon::~Weapon()

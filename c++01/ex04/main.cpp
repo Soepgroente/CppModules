@@ -40,7 +40,10 @@ int main(int argc, char** argv)
 		return (2);
 	dest.open("dest.txt");
 	if (dest.is_open() == false)
+	{
+		src.close();
 		return (3);
+	}
 	replace_lines(dest, src, s1, s2);
 	src.close();
 	dest.close();
