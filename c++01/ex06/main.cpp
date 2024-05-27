@@ -6,12 +6,14 @@
 
 int	main(int argc, char** argv)
 {
-	std::string	input;
-
 	if (argc != 2)
+	{
 		std::cout << ERROR_MSG << std::endl;
+		return (1);
+	}
 
-	Harl	robot(argv[1]);
+	std::string	input;
+	Harl		robot(argv[1]);
 
 	if (robot.filter == -1)
 	{

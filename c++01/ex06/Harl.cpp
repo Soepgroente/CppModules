@@ -31,17 +31,20 @@ Harl::~Harl()
 
 void	Harl::debug(void)
 {
-	std::cout << "[DEBUG]\nI love having veggie bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
+	std::cout << "[DEBUG]\nI love having veggie bacon for my ";
+	std::cout << "7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
 }
 
 void	Harl::info(void)
 {
-	std::cout << "[INFO]\nI cannot believe veggie bacon costs more money. You didn't put enough in my burger! If you did, I wouldn't be asking for more!" << std::endl;
+	std::cout << "[INFO]\nI cannot believe veggie bacon costs more money. ";
+	std::cout << "You didn't put enough in my burger! If you did, I wouldn't be asking for more!" << std::endl;
 }
 
 void	Harl::warning(void)
 {
-	std::cout << "[WARNING]\nI think I deserve to have some extra salad for free. I've been coming for years whereas you started working here since last month." << std::endl;
+	std::cout << "[WARNING]\nI think I deserve to have some extra salad for free. ";
+	std::cout << "I've been coming for years whereas you started working here since last month." << std::endl;
 }
 
 void	Harl::error(void)

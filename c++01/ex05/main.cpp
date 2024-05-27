@@ -9,9 +9,8 @@ int	main(int argc, char** argv)
 		std::cout << "Please enter some commands for Harl!" << std::endl;
 	for (int i = 1; argv[i] != nullptr; i++)
 	{
-		std::cout << "Message " << i << ":";
+		std::cout << "Message " << i << ":\n";
 		robot.complain(argv[i]);
-		std::cout << std::endl;
 	}
 	return (0);
 }

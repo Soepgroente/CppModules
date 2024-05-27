@@ -7,6 +7,13 @@
 
 class Harl
 {
+	public:
+	int				filter;
+	void	complain(std::string level);
+	Harl();
+	Harl(std::string input);
+	~Harl();
+
 	typedef enum s_filter
 	{
 		DEBUG,
@@ -21,15 +28,7 @@ class Harl
 	void 			warning(void);
 	void 			error(void);
 	std::string		levels[4];
-
 	int				level_to_int(std::string input);
-
-	public:
-	int				filter;
-	void	complain(std::string level);
-	Harl();
-	Harl(std::string input);
-	~Harl();
 };
 
 

@@ -1,4 +1,4 @@
-NAME	=	Harl.out
+NAME	=	Harl
 RM		=	rm -rf
 CC		=	c++
 CFLAGS	=	-Wall -Werror -Wextra -std=c++11 -g
