@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <vector>
 #include "Zombie.hpp"
 
 size_t	ft_atoi(std::string& input)
@@ -26,20 +25,17 @@ int	main(void)
 	std::string	num;
 	size_t		N;
 
-	for (int x = 0; x < 5; x++)
+	std::cout << "Please insert # of zombies in the horde" << std::endl;
+	getline(std::cin, num);
+	N = ft_atoi(num);
+	if (N > 1000000)
+		std::cout << "Please insert a reasonable amount of zombies, I don't want to die" << std::endl;
+	else
 	{
-		std::cout << "Please insert # of zombies in the horde" << std::endl;
-		getline(std::cin, num);
-		N = ft_atoi(num);
-		if (N > 1000000)
-			std::cout << "Please insert a reasonable amount of zombies, I don't want to die" << std::endl;
-		else
-		{
-			Horde = zombieHorde(N, "Harry");
-			for (size_t i = 0; i < N; i++)
-				Horde[i].announce();
-			delete[] Horde;
-		}
+		Horde = zombieHorde(N, "Harry");
+		for (size_t i = 0; i < N; i++)
+			Horde[i].announce();
+		delete[] Horde;
 	}
 	return (0);
 }

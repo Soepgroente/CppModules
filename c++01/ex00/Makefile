@@ -1,7 +1,7 @@
 NAME	=	Zombfg
 RM		=	rm -rf
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98 #-g3 -fsanitize=address
+CFLAGS	=	-Wall -Werror -Wextra -std=c++11 #-g3 -fsanitize=address
 HEADERS	=	
 SRCS	=	main.cpp \
 			newZombie.cpp \
