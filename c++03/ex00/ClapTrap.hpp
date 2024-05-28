@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+/*	Include copy constructor && assignment operator overload	*/
+
 class ClapTrap
 {
 	public:

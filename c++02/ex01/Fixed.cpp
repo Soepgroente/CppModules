@@ -3,16 +3,15 @@
 #include <cmath>
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed() : value(0)
 {
-	value = 0;
 	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& original)
 {
-	this->value = original.value;
 	std::cout << "Copy constructor called" << std::endl;
+	*this = original;
 }
 
 Fixed::Fixed(const int val)
@@ -23,8 +22,8 @@ Fixed::Fixed(const int val)
 
 Fixed::Fixed(const float val)
 {
-	value = (int)std::roundf(val * (1 << fractional_bits));
 	std::cout << "Float constructor called" << std::endl;
+	value = (int)std::roundf(val * (1 << fractional_bits));
 }
 
 Fixed::~Fixed()
@@ -63,6 +62,7 @@ void Fixed::setRawBits(int const raw)
 
 void	Fixed::operator=(const Fixed& original)
 {
+	std::cout << "Copy assignment operator called" << std::endl;
 	this->value = original.getRawBits();
 }
 

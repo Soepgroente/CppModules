@@ -11,7 +11,8 @@ ScavTrap::ScavTrap() : ClapTrap()
 }
 
 ScavTrap::ScavTrap(std::string& name) : ClapTrap(name, 100, 50, 20)
-{
+{		uint32_t	_hp;
+
 	std::cout << "ScavTrap name constructor called" << std::endl;
 }
 

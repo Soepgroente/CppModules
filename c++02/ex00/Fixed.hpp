@@ -1,13 +1,9 @@
-#include <iostream>
-
 #pragma once
+
+#include <iostream>
 
 class	Fixed
 {
-	private:
-		int					value;
-		static const int	fractional_bits = 8;
-
 	public:
 	
 	int		getRawBits(void) const;
@@ -17,4 +13,9 @@ class	Fixed
 	Fixed();
 	Fixed(const Fixed& original);
 	~Fixed();
+
+	private:
+	
+	int					value;
+	static const int	fractional_bits = 8;
 };
