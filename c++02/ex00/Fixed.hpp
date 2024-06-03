@@ -8,11 +8,11 @@ class	Fixed
 	
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
-	void	operator=(const Fixed& original);
 
 	Fixed();
 	Fixed(const Fixed& original);
 	~Fixed();
+	void	operator=(const Fixed& original);
 
 	private:
 	

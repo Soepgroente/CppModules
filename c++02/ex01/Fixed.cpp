@@ -41,13 +41,11 @@ float Fixed::toFloat(void) const
 	int		whole_num;
 	int 	partial_num;
 	float	scaled_float;
-	float	result;
 
 	whole_num = getRawBits() >> fractional_bits;
 	partial_num = value & ((1 << fractional_bits) - 1);
 	scaled_float = static_cast<float>(partial_num) / (1 << fractional_bits);
-	result = (float)whole_num + scaled_float;
-	return (result);
+	return ((float)whole_num + scaled_float);
 }
 
 int Fixed::getRawBits(void) const

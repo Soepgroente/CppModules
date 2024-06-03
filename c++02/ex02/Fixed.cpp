@@ -34,7 +34,7 @@ int	Fixed::toInt(void) const
 
 float Fixed::toFloat(void) const
 {
-	return (this->getRawBits() / float(1 << fractional_bits));
+	return (this->getRawBits() / (float)(1 << fractional_bits));
 }
 
 int Fixed::getRawBits(void) const
@@ -132,14 +132,12 @@ bool	Fixed::operator!=(const Fixed& fn)
 
 Fixed	Fixed::operator+(const Fixed& fn)
 {
-	int	sum = this->getRawBits() + fn.getRawBits();
-	return (Fixed(sum));
+	return (Fixed(this->getRawBits() + fn.getRawBits()));
 }
 
 Fixed	Fixed::operator-(const Fixed& fn)
 {
-	int	sum = this->getRawBits() - fn.getRawBits();
-	return (Fixed(sum));
+	return (Fixed(this->getRawBits() - fn.getRawBits()));
 }
 
 Fixed	Fixed::operator*(const Fixed& fn)
