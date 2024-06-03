@@ -138,14 +138,16 @@ bool	Fixed::operator!=(const Fixed& fn)
 
 Fixed	Fixed::operator+(const Fixed& fn)
 {
-	int	sum = this->getRawBits() + fn.getRawBits();
-	return (Fixed(sum));
+	long	sum = this->getRawBits() + fn.getRawBits();
+	sum = sum >> fractional_bits;
+	return (Fixed((int)sum));
 }
 
 Fixed	Fixed::operator-(const Fixed& fn)
 {
-	int	sum = this->getRawBits() - fn.getRawBits();
-	return (Fixed(sum));
+	long	sum = this->getRawBits() - fn.getRawBits();
+	sum = sum >> fractional_bits;
+	return (Fixed((int)sum));
 }
 
 Fixed	Fixed::operator*(const Fixed& fn)

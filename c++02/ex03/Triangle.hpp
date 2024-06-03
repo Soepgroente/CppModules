@@ -6,9 +6,6 @@
 
 class	Triangle
 {
-	private:
-		const Point	vertices[3];
-
 	public:
 	
 	const Point&	get_pt(int point) const;
@@ -18,6 +15,10 @@ class	Triangle
 	Triangle(const Point& a, const Point& b, const Point& c);
 	Triangle(const Triangle& og);
 	~Triangle();
+
+	private:
+	
+	const Point	vertices[3];
 };
 
 bool	inside_triangle(const Triangle& triangle, const Point& point);

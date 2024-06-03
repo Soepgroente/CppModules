@@ -23,12 +23,21 @@ Point::~Point()
 
 Fixed	Point::get_x() const
 {
-	Fixed	tmp = this->x;
-	return (tmp);
+	return (Fixed(this->x));
 }
 
 Fixed	Point::get_y() const
 {
-	Fixed	tmp = this->y;
-	return (tmp);
+	return (Fixed(this->y));
+}
+
+Fixed&	length(Point& a, Point& b)
+{
+	Fixed	res;
+	Fixed	length_x(a.get_x() - b.get_x());
+	Fixed	length_y(a.get_y() - b.get_y());
+
+	length_x.abs();
+	length_y.abs();
+	res = std::sqrt()
 }
