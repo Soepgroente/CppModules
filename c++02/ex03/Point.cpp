@@ -1,5 +1,6 @@
 #include "Point.hpp"
 #include "Fixed.hpp"
+#include <cmath>
 
 Point::Point() : x(0), y(0)
 {
@@ -31,13 +32,21 @@ Fixed	Point::get_y() const
 	return (Fixed(this->y));
 }
 
-Fixed&	length(Point& a, Point& b)
+bool	Point::operator==(const Point& other)	const
+{
+	if (this->get_x() == other.get_x() && this->get_y() == other.get_y())
+		return (true);
+	return (false);
+}
+
+Fixed	Point::length(const Point& a, const Point& b)
 {
 	Fixed	res;
 	Fixed	length_x(a.get_x() - b.get_x());
 	Fixed	length_y(a.get_y() - b.get_y());
 
-	length_x.abs();
-	length_y.abs();
-	res = std::sqrt()
+	length_x = length_x * length_x;
+	length_y = length_y * length_y;
+	res = (float)sqrt((length_x + length_y).toFloat());
+	return (res);
 }

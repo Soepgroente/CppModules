@@ -6,7 +6,6 @@ SRCS	=	calculate.cpp \
 			Fixed.cpp \
 			main.cpp \
 			Point.cpp \
-			Triangle.cpp \
 
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	=	objects

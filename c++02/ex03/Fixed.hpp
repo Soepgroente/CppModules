@@ -10,10 +10,10 @@ class	Fixed
 
 	public:
 	
-	int		toInt(void) const;
-	float	toFloat(void) const;
-	int		getRawBits(void) const;
+	int		getRawBits() const;
 	void	setRawBits(int const raw);
+	int		toInt() const;
+	float	toFloat() const;
 	void	abs();
 
 	void	operator=(const Fixed& original);

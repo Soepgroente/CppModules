@@ -90,56 +90,61 @@ void	Fixed::operator=(const Fixed& original)
 
 bool	Fixed::operator<(const Fixed& fn)
 {
-	if (fn.getRawBits() < this->getRawBits())
+	if (this->getRawBits() < fn.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator>(const Fixed& fn)
 {
-	if (fn.getRawBits() > this->getRawBits())
+	if (this->getRawBits() > fn.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator<=(const Fixed& fn)
 {
-	if (fn.getRawBits() <= this->getRawBits())
+	if (this->getRawBits() <= fn.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator>=(const Fixed& fn)
 {
-	if (fn.getRawBits() >= this->getRawBits())
+	if (this->getRawBits() >= fn.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator==(const Fixed& fn)
 {
-	if (fn.getRawBits() == this->getRawBits())
+	if (this->getRawBits() == fn.getRawBits())
 		return (true);
 	return (false);
 }
 
 bool	Fixed::operator!=(const Fixed& fn)
 {
-	if (fn.getRawBits() != this->getRawBits())
+	if (this->getRawBits() != fn.getRawBits())
 		return (true);
 	return (false);
 }
 
 Fixed	Fixed::operator+(const Fixed& fn)
 {
-	return (Fixed(this->getRawBits() + fn.getRawBits()));
+	Fixed res;
+
+	res.setRawBits(this->getRawBits() + fn.getRawBits());
+	return (res);
 }
 
 Fixed	Fixed::operator-(const Fixed& fn)
 {
-	return (Fixed(this->getRawBits() - fn.getRawBits()));
-}
+	Fixed res;
 
+	res.setRawBits(this->getRawBits() - fn.getRawBits());
+	return (res);
+}
 Fixed	Fixed::operator*(const Fixed& fn)
 {
 	Fixed	product;
@@ -152,9 +157,12 @@ Fixed	Fixed::operator*(const Fixed& fn)
 Fixed	Fixed::operator/(const Fixed& fn)
 {
 	Fixed	division;
+	long	numerator;
+	long	denominator;
 
-	long	tmp = (((long)this->getRawBits() << fractional_bits) / fn.getRawBits());
-	division.setRawBits((int)tmp);
+	numerator = (long)this->getRawBits();
+	denominator = (long)fn.getRawBits();
+	division.setRawBits((int)((numerator << fractional_bits) / denominator));
 	return (division);
 }
 

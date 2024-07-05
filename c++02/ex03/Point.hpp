@@ -10,13 +10,15 @@ class	Point
 	void	operator=(const Point& original) = delete;
 	Fixed	get_x() const;
 	Fixed	get_y() const;
+
 	Point();
 	Point(const float x, const float y);
 	Point(const Fixed& x, const Fixed& y);
 	Point(const Point& original);
 	~Point();
+	bool	operator==(const Point& other)	const;
 
-	static Fixed&	length(Point& a, Point& b);
+	static Fixed	length(const Point& a, const Point& b);
 
 	private:
 	
@@ -24,4 +26,4 @@ class	Point
 	const Fixed	y;
 };
 
-bool	inside_triangle(const Point a, const Point b, const Point c, const Point point);
+bool	inside_triangle(const Point& a, const Point& b, const Point& c, const Point& point);
