@@ -7,15 +7,8 @@ int	main(void)
 	Fixed a;
 	Fixed const b(Fixed(10.0f) * Fixed(8));
 	Fixed x(1000000);
-	Fixed y(0.2f);
+	Fixed y(0.25f);
 	Fixed c(x / y);
-
-	// std::cout << a << std::endl;
-	// std::cout << ++a << std::endl;
-
-	// std::cout << a << std::endl;
-	// std::cout << a++ << std::endl;
-	// std::cout << a << std::endl;
 
 	std::cout << b << std::endl;
 	std::cout << Fixed::max(a, b) << std::endl;

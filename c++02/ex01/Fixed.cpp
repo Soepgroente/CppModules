@@ -38,14 +38,7 @@ int	Fixed::toInt(void) const
 
 float Fixed::toFloat(void) const
 {
-	int		whole_num;
-	int 	partial_num;
-	float	scaled_float;
-
-	whole_num = getRawBits() >> fractional_bits;
-	partial_num = value & ((1 << fractional_bits) - 1);
-	scaled_float = static_cast<float>(partial_num) / (1 << fractional_bits);
-	return ((float)whole_num + scaled_float);
+	return (this->getRawBits() / (float)(1 << fractional_bits));
 }
 
 int Fixed::getRawBits(void) const

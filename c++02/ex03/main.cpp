@@ -17,7 +17,9 @@ int	main(void)
 	Point	b(2.0f, 0);
 	Point	c(0, 6);
 	Point	something(0.1f, 0.1f);
+	Point	somethingElse(Fixed(0), Fixed(6));
 
 	test_triangle(a, b, c, something);
+	test_triangle(a, b, c, somethingElse);
 	return (0);
 }

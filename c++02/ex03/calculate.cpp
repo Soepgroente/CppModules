@@ -12,13 +12,15 @@ Fixed	triangleArea(Point a, Point b, Point c)
 	return (area);
 }
 
-bool	inside_triangle( const Point& a, const Point& b, const Point& c, const Point& point)
+bool	inside_triangle(const Point& a, const Point& b, const Point& c, const Point& point)
 {
 	Fixed	ab_point = triangleArea(a, b, point);
 	Fixed	bc_point = triangleArea(b, c, point);
 	Fixed	ac_point = triangleArea(a, c, point);
 	Fixed	original = triangleArea(a, b, c);
 
+	if (a == point || b == point || c == point)
+		return (false);
 	if (ab_point + bc_point + ac_point != original)
 		return (false);
 	return (true);
