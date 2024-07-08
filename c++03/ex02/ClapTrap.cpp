@@ -5,21 +5,36 @@ ClapTrap::ClapTrap() : _hp(10), _ep(10), _ad(0)
 	std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string& name) : _hp(10), _ep(10), _ad(0)
+ClapTrap::ClapTrap(const std::string& name) : _hp(10), _ep(10), _ad(0)
 {
 	this->_name = name;
 	std::cout << "ClapTrap name constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string& name, uint32_t hp, uint32_t ep, uint32_t ad) :
-_name(name), _hp(hp), _ep(ep), _ad(ad)
+ClapTrap::ClapTrap(const std::string& name, uint32_t hp, uint32_t ep, uint32_t ad) :
+	_name(name), _hp(hp), _ep(ep), _ad(ad)
 {
 	std::cout << "ClapTrap values constructor called" << std::endl;
 }
 
+ClapTrap::ClapTrap(const ClapTrap& trap)
+{
+	*this = trap;
+	std::cout << "Claptrap copy constructor called" << std::endl;
+}
+
+void	ClapTrap::operator=(const ClapTrap& trap)
+{
+	this->_name = trap._name;
+	this->_hp = trap._hp;
+	this->_ep = trap._ep;
+	this->_ad = trap._ad;
+	std::cout << "Claptrap assignment operator called" << std::endl;
+}
+
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap deconstructor called" << std::endl;
+	std::cout << "ClapTrap destructor called" << std::endl;
 }
 
 void	ClapTrap::setAttack(uint32_t amount)
@@ -28,7 +43,7 @@ void	ClapTrap::setAttack(uint32_t amount)
 	std::cout << this->_name << "\'s attack has been set to " << amount << std::endl;
 }
 
-uint32_t	ClapTrap::getAttack(void)
+uint32_t	ClapTrap::getAttack()
 {
 	return (this->_ad);
 }
