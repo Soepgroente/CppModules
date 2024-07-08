@@ -5,10 +5,25 @@ ClapTrap::ClapTrap() : hp(10), ep(10), ad(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string& name) : hp(10), ep(10), ad(0)
+ClapTrap::ClapTrap(const std::string& name) : hp(10), ep(10), ad(0)
 {
 	this->name = name;
 	std::cout << "Name constructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap& trap)
+{
+	*this = trap;
+	std::cout << "Copy constructor called" << std::endl;
+}
+
+void	ClapTrap::operator=(const ClapTrap& trap)
+{
+	this->name = trap.name;
+	this->hp = trap.hp;
+	this->ep = trap.ep;
+	this->ad = trap.ad;
+	std::cout << "Assignment operator called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()

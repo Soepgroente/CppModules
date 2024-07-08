@@ -1,2 +1,5 @@
 .vscode
 *.o
+.DS_store
+fixed_point
+triangle
