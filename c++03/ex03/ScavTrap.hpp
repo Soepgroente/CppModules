@@ -3,7 +3,7 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
 	public:
 
@@ -16,4 +16,9 @@ class ScavTrap : public ClapTrap
 	~ScavTrap();
 
 	void	operator=(const ScavTrap& trap);
+
+	const static uint32_t defaultHP;
+	const static uint32_t defaultEP;
+	const static uint32_t defaultAD;
+	const static std::string defaultName;
 };

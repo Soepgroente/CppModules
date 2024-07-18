@@ -1,5 +1,9 @@
 #include "FragTrap.hpp"
-#include "ClapTrap.hpp"
+
+const uint32_t		FragTrap::defaultHP = 100;
+const uint32_t		FragTrap::defaultEP = 100;
+const uint32_t		FragTrap::defaultAD = 30;
+const std::string 	FragTrap::defaultName = "FragTrap";
 
 FragTrap::FragTrap() : ClapTrap()
 {
@@ -10,7 +14,7 @@ FragTrap::FragTrap() : ClapTrap()
 	name = "FragTrap";
 }
 
-FragTrap::FragTrap(std::string& name) : ClapTrap(name, 100, 100, 30)
+FragTrap::FragTrap(const std::string& name) : ClapTrap(name)
 {
 	std::cout << "FragTrap name constructor called" << std::endl;
 }

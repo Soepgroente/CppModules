@@ -21,8 +21,8 @@ class ClapTrap
 
 	protected:
 	
-	std::string	_name;
-	uint32_t	_hp;
-	uint32_t	_ep;
-	uint32_t	_ad;
+	std::string	name;
+	uint32_t	hp;
+	uint32_t	ep;
+	uint32_t	ad;
 };

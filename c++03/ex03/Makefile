@@ -1,8 +1,9 @@
-NAME	=	FragTrap
+NAME	=	DiamondTrap
 RM		=	rm -rf
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++11 -g
+CFLAGS	=	-Wall -Werror -Wextra -std=c++11
 SRCS	=	ClapTrap.cpp \
+			DiamondTrap.cpp \
 			FragTrap.cpp \
 			main.cpp \
 			ScavTrap.cpp \

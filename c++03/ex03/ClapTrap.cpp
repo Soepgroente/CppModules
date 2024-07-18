@@ -1,11 +1,16 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : hp(10), ep(10), ad(0)
+const uint32_t		ClapTrap::defaultHP = 10;
+const uint32_t		ClapTrap::defaultEP = 10;
+const uint32_t		ClapTrap::defaultAD = 0;
+const std::string	ClapTrap::defaultName = "ClapTrap";
+
+ClapTrap::ClapTrap() : name(defaultName), hp(defaultHP), ep(defaultEP), ad(defaultAD)
 {
 	std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string& name) : hp(10), ep(10), ad(0)
+ClapTrap::ClapTrap(const std::string& name) : hp(defaultHP), ep(defaultEP), ad(defaultAD)
 {
 	this->name = name;
 	std::cout << "ClapTrap name constructor called" << std::endl;
@@ -41,6 +46,16 @@ void	ClapTrap::setAttack(uint32_t amount)
 {
 	this->ad = amount;
 	std::cout << this->name << "\'s attack has been set to " << amount << std::endl;
+}
+
+void	ClapTrap::setName(const std::string& name)
+{
+	this->name = name;
+}
+
+std::string&	ClapTrap::getName()
+{
+	return (this->name);
 }
 
 uint32_t	ClapTrap::getAttack()

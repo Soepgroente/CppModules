@@ -1,5 +1,9 @@
 #include "ScavTrap.hpp"
-#include "ClapTrap.hpp"
+
+const uint32_t		ScavTrap::defaultHP = 100;
+const uint32_t		ScavTrap::defaultEP = 100;
+const uint32_t		ScavTrap::defaultAD = 30;
+const std::string	ScavTrap::defaultName = "ScavTrap";
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
