@@ -8,10 +8,10 @@ const std::string	DiamondTrap::defaultName = "DiamondTrap";
 DiamondTrap::DiamondTrap() : ClapTrap()
 {
 	std::cout << "DiamondTrap default constructor called" << std::endl;
-	hp = defaultHP;
-	ep = defaultEP;
-	ad = defaultAD;
-	Name = defaultName;
+	hp = DiamondTrap::defaultHP;
+	ep = DiamondTrap::defaultEP;
+	ad = DiamondTrap::defaultAD;
+	Name = DiamondTrap::defaultName;
 	ClapTrapName = ClapTrap::name + "_clap_name";
 }
 
@@ -53,5 +53,5 @@ void	DiamondTrap::attack(const std::string& target)
 
 void	DiamondTrap::whoAmI()
 {
-	std::cout << "Am I " << this->name << " or " << this->ClapTrapName << "??? I don't know anymore... :-(" << std::endl;
+	std::cout << "Am I " << this->Name << " or " << this->ClapTrapName << "??? I don't know anymore... :-(" << std::endl;
 }

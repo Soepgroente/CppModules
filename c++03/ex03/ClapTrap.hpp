@@ -22,6 +22,8 @@ class ClapTrap
 
 	void	operator=(const ClapTrap& trap);
 
+	protected:
+
 	std::string	name;
 	uint32_t	hp;
 	uint32_t	ep;

@@ -41,7 +41,7 @@ void	FragTrap::operator=(const FragTrap& trap)
 
 void	FragTrap::highFivesGuys()
 {
-	std::cout << "FragTrap " << this->name << "is SHOUTING for some high fives!!!!" << std::endl;
+	std::cout << "FragTrap " << this->name << " is SHOUTING for some high fives!!!!" << std::endl;
 }
 
 void	FragTrap::attack(const std::string& target)
