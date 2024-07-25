@@ -8,11 +8,11 @@ int	main()
 	ClapTrap	sjonnie(a);
 	ClapTrap	harry(b);
 
-	sjonnie.setAttack(2);
-	for (int i = 0; i < 20; i++)
+	sjonnie.setAttack(5);
+	for (int i = 0; i < 5; i++)
 	{
 		sjonnie.attack(b);
-		harry.beRepaired(2);
 		harry.takeDamage(sjonnie.getAttack());
+		harry.beRepaired(2);
 	}
 }

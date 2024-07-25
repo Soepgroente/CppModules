@@ -19,6 +19,8 @@ ClapTrap::ClapTrap(const ClapTrap& trap)
 
 void	ClapTrap::operator=(const ClapTrap& trap)
 {
+	if (this == &trap)
+		return ;
 	this->name = trap.name;
 	this->hp = trap.hp;
 	this->ep = trap.ep;
