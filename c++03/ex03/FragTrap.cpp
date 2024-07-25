@@ -8,9 +8,9 @@ const std::string 	FragTrap::defaultName = "FragTrap";
 FragTrap::FragTrap() : ClapTrap()
 {
 	std::cout << "FragTrap default constructor called" << std::endl;
-	hp = 100;
-	ep = 100;
-	ad = 30;
+	hp = defaultHP;
+	ep = defaultEP;
+	ad = defaultAD;
 	name = "FragTrap";
 }
 
@@ -41,22 +41,5 @@ void	FragTrap::operator=(const FragTrap& trap)
 
 void	FragTrap::highFivesGuys()
 {
-	std::cout << "FragTrap " << this->name << " is SHOUTING for some high fives!!!!" << std::endl;
-}
-
-void	FragTrap::attack(const std::string& target)
-{
-	if (hp == 0)
-	{
-		std::cout << "FragTrap " << this->name << " is dead and cannot attack" << std::endl;
-	}
-	else if (ep > 0)
-	{
-		std::cout << "FragTrap " << this->name << " attacks " << target \
-			<< " causing " << this->ad << " points of damage!" << std::endl;
-		ep--;
-	}
-	else
-		std::cout << "FragTrap " << this->name << \
-			" has insufficient energy points to attack" << std::endl;
+	std::cout << this->type << " " << this->name << " is SHOUTING for some high fives!!!!" << std::endl;
 }

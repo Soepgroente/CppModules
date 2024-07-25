@@ -4,20 +4,14 @@
 int	main()
 {
 	DiamondTrap	ConfusedOne;
-	FragTrap	Happy(std::string("Happy"));
-	FragTrap	Clown;
-	ScavTrap	Random;
+	DiamondTrap	Diamond("Diamond");
 
-	Clown.setName("Clown");
-	Clown.setAttack(2);
-	Random.attack(Clown.getName());
+	ConfusedOne.whoAmI();
+	Diamond.whoAmI();
 	for (int i = 0; i < 2; i++)
 	{
-		Happy.attack(Clown.getName());
-		Clown.takeDamage(Happy.getAttack());
-		Clown.beRepaired(2);
-		ConfusedOne.whoAmI();
-		ConfusedOne.attack(Happy.getName());
+		Diamond.beRepaired(2);
+		ConfusedOne.attack(Diamond.getName());
 		ConfusedOne.takeDamage(1);
 		ConfusedOne.beRepaired(1);
 		ConfusedOne.highFivesGuys();

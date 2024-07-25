@@ -21,14 +21,10 @@ class DiamondTrap : public ScavTrap, public FragTrap
 
 	private:
 
-	std::string	Name;
 	std::string	ClapTrapName;
-	uint32_t	hp;
-	uint32_t	ep;
-	uint32_t	ad;
 
-	const static uint32_t defaultHP;
-	const static uint32_t defaultEP;
-	const static uint32_t defaultAD;
-	const static std::string defaultName;
+	// const static uint32_t defaultHP;
+	// const static uint32_t defaultEP;
+	// const static uint32_t defaultAD;
+	// const static std::string defaultName;
 };

@@ -8,14 +8,20 @@ const std::string	ScavTrap::defaultName = "ScavTrap";
 ScavTrap::ScavTrap() : ClapTrap()
 {
 	std::cout << "ScavTrap default constructor called" << std::endl;
-	hp = 100;
-	ep = 50;
-	ad = 20;
-	name = "ScavTrap";
+	hp = defaultHP;
+	ep = defaultEP;
+	ad = defaultAD;
+	name = defaultName;
+	type = "ScavTrap";
 }
 
-ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name, 100, 50, 20)
+ScavTrap::ScavTrap(const std::string& name) : ClapTrap()
 {
+	hp = defaultHP;
+	ep = defaultEP;
+	ad = defaultAD;
+	this->name = name;
+	type = "ScavTrap";
 	std::cout << "ScavTrap name constructor called" << std::endl;
 }
 
@@ -32,31 +38,17 @@ ScavTrap::~ScavTrap()
 
 void	ScavTrap::operator=(const ScavTrap& trap)
 {
+	std::cout << "ScavTrap assignment operator called" << std::endl;
+	if (this == &trap)
+		return ;
 	this->name = trap.name;
+	this->type = trap.type;
 	this->hp = trap.hp;
 	this->ep = trap.ep;
 	this->ad = trap.ad;
-	std::cout << "ScavTrap assignment operator called" << std::endl;
 }
 
 void	ScavTrap::guardGate()
 {
-	std::cout << "ScavTrap " << this->name << "is in gatekeeping mode" << std::endl;
-}
-
-void	ScavTrap::attack(const std::string& target)
-{
-	if (hp == 0)
-	{
-		std::cout << "ScavTrap " << this->name << " is dead and cannot attack" << std::endl;
-	}
-	else if (ep > 0)
-	{
-		std::cout << "ScavTrap " << this->name << " attacks " << target \
-			<< " causing " << this->ad << " points of damage!" << std::endl;
-		ep--;
-	}
-	else
-		std::cout << "ScavTrap " << this->name << \
-			" has insufficient energy points to attack" << std::endl;
+	std::cout << this->type << " " << this->name << " is in gatekeeping mode" << std::endl;
 }
