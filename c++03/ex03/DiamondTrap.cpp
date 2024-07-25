@@ -15,7 +15,7 @@ DiamondTrap::DiamondTrap() : ClapTrap()
 	ClapTrapName = ClapTrap::name + "_clap_name";
 }
 
-DiamondTrap::DiamondTrap(std::string& name) : ClapTrap(name)
+DiamondTrap::DiamondTrap(const std::string& name) : ClapTrap(name)
 {
 	std::cout << "DiamondTrap name constructor called" << std::endl;
 	hp = defaultHP;
