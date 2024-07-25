@@ -14,7 +14,8 @@ int	main()
 
 	Wire.setAttack(2);
 	Random.attack(c);
-	for (int i = 0; i < 2; i++)
+	Random.guardGate();
+	for (int i = 0; i < 6; i++)
 	{
 		Barbed.attack(b);
 		Wire.beRepaired(2);
