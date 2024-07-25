@@ -1,18 +1,18 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : hp(10), ep(10), ad(0)
+ClapTrap::ClapTrap() : name("ClapTrap"), type("ClapTrap"), hp(10), ep(10), ad(0)
 {
 	std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string& name) : hp(10), ep(10), ad(0)
+ClapTrap::ClapTrap(const std::string& name) : type("ClapTrap"), hp(10), ep(10), ad(0)
 {
 	this->name = name;
 	std::cout << "ClapTrap name constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string& name, uint32_t hp, uint32_t ep, uint32_t ad) :
-	name(name), hp(hp), ep(ep), ad(ad)
+	name(name), type("ClapTrap"), hp(hp), ep(ep), ad(ad)
 {
 	std::cout << "ClapTrap values constructor called" << std::endl;
 }
@@ -26,6 +26,7 @@ ClapTrap::ClapTrap(const ClapTrap& trap)
 void	ClapTrap::operator=(const ClapTrap& trap)
 {
 	this->name = trap.name;
+	this->type = trap.type;
 	this->hp = trap.hp;
 	this->ep = trap.ep;
 	this->ad = trap.ad;
@@ -52,16 +53,16 @@ void	ClapTrap::attack(const std::string& target)
 {
 	if (hp == 0)
 	{
-		std::cout << "ClapTrap " << this->name << " is dead and cannot attack" << std::endl;
+		std::cout << this->type << " " << this->name << " is dead and cannot attack" << std::endl;
 	}
 	else if (ep > 0)
 	{
-		std::cout << "ClapTrap " << this->name << " attacks " << target \
+		std::cout << this->type << " " << this->name << " attacks " << target \
 			<< " causing " << this->ad << " points of damage!" << std::endl;
 		ep--;
 	}
 	else
-		std::cout << "ClapTrap " << this->name << \
+		std::cout << this->type << " " << this->name << \
 			" has insufficient energy points to attack" << std::endl;
 }
 
@@ -69,7 +70,7 @@ void	ClapTrap::takeDamage(uint32_t amount)
 {
 	if (hp > 0)
 	{
-		std::cout << "ClapTrap " << this->name << " takes " << amount \
+		std::cout << this->type << " " << this->name << " takes " << amount \
 			<< " points of damage!" << std::endl;
 		if (amount >= hp)
 			hp = 0;
@@ -78,7 +79,7 @@ void	ClapTrap::takeDamage(uint32_t amount)
 	}
 	if (hp == 0)
 	{
-		std::cout << "ClapTrap " << this->name << " is dead" << std::endl;
+		std::cout << this->type << " " << this->name << " is dead" << std::endl;
 	}
 }
 
@@ -86,16 +87,16 @@ void	ClapTrap::beRepaired(uint32_t amount)
 {
 	if (hp == 0)
 	{
-		std::cout << "ClapTrap " << this->name << " is dead and cannot be repaired" << std::endl;
+		std::cout << this->type << " " << this->name << " is dead and cannot be repaired" << std::endl;
 	}
 	else if (ep > 0)
 	{
-		std::cout << "ClapTrap " << this->name << " repairs itself for " << amount \
+		std::cout << this->type << " " << this->name << " repairs itself for " << amount \
 			<< " hit points" << std::endl;
 		ep--;
 		hp += amount;
 	}
 	else
-		std::cout << "ClapTrap " << this->name << \
+		std::cout << this->type << " " << this->name << \
 			" has insufficient energy points to repair itself" << std::endl;
 }

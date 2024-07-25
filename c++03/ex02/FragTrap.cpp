@@ -8,10 +8,15 @@ FragTrap::FragTrap() : ClapTrap()
 	ep = 100;
 	ad = 30;
 	name = "FragTrap";
+	type = "FragTrap";
 }
 
-FragTrap::FragTrap(std::string& name) : ClapTrap(name, 100, 100, 30)
+FragTrap::FragTrap(std::string& name) : ClapTrap(name)
 {
+	hp = 100;
+	ep = 100;
+	ad = 30;
+	type = "FragTrap";
 	std::cout << "FragTrap name constructor called" << std::endl;
 }
 
@@ -29,6 +34,7 @@ FragTrap::FragTrap(const FragTrap& trap)
 void	FragTrap::operator=(const FragTrap& trap)
 {
 	this->name = trap.name;
+	this->type = trap.type;
 	this->hp = trap.hp;
 	this->ep = trap.ep;
 	this->ad = trap.ad;
@@ -37,22 +43,5 @@ void	FragTrap::operator=(const FragTrap& trap)
 
 void	FragTrap::highFivesGuys()
 {
-	std::cout << "FragTrap " << this->name << "is SHOUTING for some high fives!!!!" << std::endl;
-}
-
-void	FragTrap::attack(const std::string& target)
-{
-	if (hp == 0)
-	{
-		std::cout << "FragTrap " << this->name << " is dead and cannot attack" << std::endl;
-	}
-	else if (ep > 0)
-	{
-		std::cout << "FragTrap " << this->name << " attacks " << target \
-			<< " causing " << this->ad << " points of damage!" << std::endl;
-		ep--;
-	}
-	else
-		std::cout << "FragTrap " << this->name << \
-			" has insufficient energy points to attack" << std::endl;
+	std::cout << "FragTrap " << this->name << " is SHOUTING for some high fives!!!!" << std::endl;
 }
