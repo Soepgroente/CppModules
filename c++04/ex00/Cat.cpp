@@ -25,7 +25,7 @@ void	Cat::operator=(const Cat& original)
 	this->type = original.type;
 }
 
-void	Cat::makeSound()
+void	Cat::makeSound()	const
 {
 	std::cout << "Mweeeow!" << std::endl;
 }

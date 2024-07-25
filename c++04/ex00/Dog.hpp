@@ -12,5 +12,5 @@ class Dog : public Animal
 	Dog(const Dog& original);
 	void	operator=(const Dog& original);
 
-	void	makeSound() override;
+	void	makeSound() const override;
 };

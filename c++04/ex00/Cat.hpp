@@ -12,5 +12,5 @@ class Cat : public Animal
 	Cat(const Cat& original);
 	void	operator=(const Cat& original);
 
-	void	makeSound() override;
+	void	makeSound() const override;
 };

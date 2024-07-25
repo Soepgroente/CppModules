@@ -25,7 +25,7 @@ void	Dog::operator=(const Dog& original)
 	this->type = original.type;
 }
 
-void	Dog::makeSound()
+void	Dog::makeSound()	const
 {
 	std::cout << "Wooooof" << std::endl;
 }
