@@ -12,9 +12,10 @@ class	Animal
 	void	operator=(const Animal& original) = delete;
 
 	virtual void	makeSound() const;
-	std::string		getType() const;
+	const std::string&	getType() const;
 
 	protected:
 
 	std::string	type;
+	void	constructorPrinter(std::string action)	const;
 };
