@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <iostream>
 #include <exception>
 #include <stdexcept>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -23,7 +23,7 @@ class Bureaucrat
 	void				downGrade();
 	void				upGrade();
 
-	void				signForm(const Form& Form)	const;
+	void				signForm(AForm& Form);
 	std::ostream&		operator<<(std::ostream& out)	const;
 
 	class GradeTooHighException : public std::runtime_error

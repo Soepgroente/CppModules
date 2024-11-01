@@ -17,6 +17,11 @@ Form::~Form()
 {
 }
 
+Form::Form(const Form& original) : _name(original._name), \
+	signGrade(original.signGrade), execGrade(original.execGrade), _signed(original._signed)
+{
+}
+
 const std::string&	Form::getName()	const
 {
 	return (_name);
@@ -30,6 +35,11 @@ int	Form::getSignGrade()	const
 int	Form::getExecGrade()	const
 {
 	return (execGrade);
+}
+
+bool	Form::getSignedStatus()	const
+{
+	return (_signed);
 }
 
 void	Form::beSigned(const Bureaucrat& Bureaucrat)
@@ -48,7 +58,8 @@ std::ostream&	Form::operator<<(std::ostream& out)
 
 	if (_signed == false)
 		signedstatus = "un" + signedstatus;
-	out << "Form name: " << this->getName() << "\nForm sign grade:" << this->getSignGrade() << "\nForm execution grade:" << this->getExecGrade() << std::endl;
+	out << "Form name: " << this->getName() << "\nForm sign grade:" << this->getSignGrade();
+	out << "\nForm execution grade:" << this->getExecGrade() << "\nSign status: " << signedstatus << std::endl;
 	return (out);
 }
 

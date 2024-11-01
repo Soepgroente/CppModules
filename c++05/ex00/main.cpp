@@ -16,5 +16,5 @@ int main()
 	{
 		std::cout << "whoopsie" << std::endl;
 	}
-	// Harry.upGrade();
+	Harry.upGrade();
 }

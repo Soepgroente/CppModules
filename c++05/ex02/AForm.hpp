@@ -7,15 +7,15 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 	public:
 	
-	Form() = delete;
-	~Form();
-	Form(const std::string& name, int signGrade, int execGrade);
-	Form(const Form& original);
-	Form&	operator=(const Form& original) = delete;
+	AForm() = delete;
+	~AForm() = default;
+	AForm(const std::string& name, int signGrade, int execGrade);
+	AForm(const AForm& original) = delete;
+	AForm&	operator=(const AForm& original) = delete;
 
 	int					getSignGrade()	const;
 	int 				getExecGrade()	const;
@@ -23,6 +23,7 @@ class Form
 	const std::string&	getName()	const;
 
 	void				beSigned(const Bureaucrat& Bureaucrat);
+	virtual void		executeForm(const Bureaucrat& Bureaucrat) = 0;
 	std::ostream&		operator<<(std::ostream& out);
 
 	class GradeTooHighException : public std::runtime_error
@@ -35,6 +36,12 @@ class Form
 	{
 		public:
 		GradeTooLowException();
+	};
+
+	class FormNotSignedException : public std::runtime_error
+	{
+		public:
+		FormNotSignedException();
 	};
 
 	private:

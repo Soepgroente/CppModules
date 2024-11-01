@@ -1,12 +1,15 @@
-NAME	=	Bureaucrat
+NAME	=	Form
 RM		=	rm -rf
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++11
+CFLAGS	=	-Wall -Werror -Wextra -std=c++17
 INCLUDE	=	-I/
 
 SRCS	=	Bureaucrat.cpp \
-			Form.cpp \
+			AForm.cpp \
 			main.cpp \
+			PresidentialPardonForm.cpp \
+			RobotomyRequestForm.cpp \
+			ShrubberyCreationForm.cpp \
 
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	=	objects
@@ -23,10 +26,10 @@ $(OBJDIR)/%.o : %.cpp
 	$(CC) -c $^ $(CFLAGS) $(INCLUDE) -o $@
 
 clean:
-	$(RM) $(OBJDIR)
+	$(RM) $(OBJDIR) *_shrubbery
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) 
 
 re: fclean all
 

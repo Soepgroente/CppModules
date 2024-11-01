@@ -1,20 +1,9 @@
 #include "Bureaucrat.hpp"
-
+#include "Form.hpp"
 int main()
 {
 	Bureaucrat	Sjon("Sjonnie", 55);
-	Bureaucrat	Harry("Harry", 1);
+	Form		becomeDictator("Dictator", 100, 20);
 
-	Harry.downGrade();
-	std::cout << Harry;
-	Harry.upGrade();
-	try
-	{
-		Harry.upGrade();
-	}
-	catch (std::exception & e)
-	{
-		std::cout << "whoopsie" << std::endl;
-	}
-	// Harry.upGrade();
+	Sjon.signForm(becomeDictator);
 }
