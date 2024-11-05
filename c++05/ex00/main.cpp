@@ -12,7 +12,7 @@ int main()
 	{
 		Harry.upGrade();
 	}
-	catch (std::exception & e)
+	catch (std::exception& e)
 	{
 		std::cout << "whoopsie" << std::endl;
 	}
