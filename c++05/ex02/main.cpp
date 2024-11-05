@@ -30,9 +30,30 @@ int main()
 	AForm*		robotkill = new RobotomyRequestForm("Marvin");
 	AForm*		criminal = new PresidentialPardonForm("Cpp05 evaluator");
 
-	tryToDoThing(*shrubbery, sjon);
-	tryToDoThing(*robotkill, sjon);
-	tryToDoThing(*criminal, sjon);
+	try
+	{
+		shrubbery->beSigned(sjon);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << shrubbery->getName() << " not signed" << std::endl;
+	}
+	try
+	{
+		robotkill->beSigned(sjon);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << robotkill->getName() << " not signed" << std::endl;
+	}
+	try
+	{
+		criminal->beSigned(sjon);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << criminal->getName() << " not signed" << std::endl;
+	}
 
 	approver.signForm(*shrubbery);
 	approver.signForm(*robotkill);

@@ -34,12 +34,14 @@ bool	AForm::getSignedStatus()	const
 
 void	AForm::beSigned(const Bureaucrat& bureaucrat)
 {
-	if (bureaucrat.getGrade() <= signGrade)
+	if (this->getSignedStatus() == true)
 	{
-		_signed = true;
+		std::cout << this->_name << " couldn't sign form because it was already signed." << std::endl;
+		return ;
 	}
-	else
+	if (bureaucrat.getGrade() > signGrade)
 		throw GradeTooLowException();
+	_signed = true;
 }
 
 std::ostream&	AForm::operator<<(std::ostream& out)

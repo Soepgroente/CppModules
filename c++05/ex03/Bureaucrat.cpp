@@ -47,13 +47,15 @@ void	Bureaucrat::downGrade()
 
 void	Bureaucrat::signForm(AForm& form)
 {
+	if (form.getSignedStatus() == true)
+	{
+		std::cout << this->_name << " couldn't sign " << form.getName() << " because it was already signed" << std::endl;
+		return ;
+	}
 	try
 	{
 		form.beSigned(*this);
-		if (form.getSignedStatus() == true)
-			std::cout << this->_name << " signed " << form.getName() << std::endl;
-		else
-			std::cout << this->_name << " couldn't sign " << form.getName() << " because it was already signed" << std::endl;
+		std::cout << this->_name << " signed " << form.getName() << std::endl;
 	}
 	catch (std::exception & e)
 	{

@@ -1,13 +1,14 @@
 NAME	=	Form
 RM		=	rm -rf
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++17
+CFLAGS	=	-Wall -Werror -Wextra -std=c++17 -g
 INCLUDE	=	-I/
 
 SRCS	=	Bureaucrat.cpp \
 			AForm.cpp \
 			Intern.cpp \
 			main.cpp \
+			Pointer.cpp \
 			PresidentialPardonForm.cpp \
 			RobotomyRequestForm.cpp \
 			ShrubberyCreationForm.cpp \

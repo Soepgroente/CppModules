@@ -30,6 +30,6 @@ AForm*	Intern::makeForm(const std::string& formName, const std::string& formTarg
 			return (f[i](formTarget));
 		}
 	}
-	std::cout << "Could not create form " << formName << " because it does not exist" << std::endl;
-	return (nullptr);
+	std::string	errorMessage = "Form " + formName + " not found";
+	throw std::runtime_error(errorMessage);
 }
