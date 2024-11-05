@@ -30,13 +30,13 @@ int main()
 	AForm*		robotkill = new RobotomyRequestForm("Marvin");
 	AForm*		criminal = new PresidentialPardonForm("Cpp05 evaluator");
 
-	shrubbery->executeForm(sjon);
-	robotkill->executeForm(sjon);
-	criminal->executeForm(sjon);
+	tryToDoThing(*shrubbery, sjon);
+	tryToDoThing(*robotkill, sjon);
+	tryToDoThing(*criminal, sjon);
 
-	shrubbery->beSigned(approver);
-	robotkill->beSigned(approver);
-	criminal->beSigned(approver);
+	approver.signForm(*shrubbery);
+	approver.signForm(*robotkill);
+	approver.signForm(*criminal);
 
 	tryToDoThing(*shrubbery, sucker);
 	tryToDoThing(*robotkill, sucker);
@@ -45,4 +45,8 @@ int main()
 	tryToDoThing(*shrubbery, universalGod);
 	tryToDoThing(*robotkill, universalGod);
 	tryToDoThing(*criminal, universalGod);
+
+	delete shrubbery;
+	delete robotkill;
+	delete criminal;
 }

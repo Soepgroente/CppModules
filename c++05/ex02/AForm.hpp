@@ -12,7 +12,7 @@ class AForm
 	public:
 	
 	AForm() = delete;
-	~AForm() = default;
+	virtual ~AForm() = default;
 	AForm(const std::string& name, int signGrade, int execGrade);
 	AForm(const AForm& original) = delete;
 	AForm&	operator=(const AForm& original) = delete;
