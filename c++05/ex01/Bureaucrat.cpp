@@ -45,12 +45,22 @@ void	Bureaucrat::downGrade()
 	_grade++;
 }
 
-void	Bureaucrat::signForm(const Form& Form)	const
+void	Bureaucrat::signForm(Form& form)
 {
-	if (Form.getSignedStatus() == true)
-		std::cout << this->_name << " signed " << Form.getName() << std::endl;
-	else
-		std::cout << this->_name << " couldn't sign " << Form.getName() << " because of insufficient permissions" << std::endl;
+	if (form.getSignedStatus() == true)
+	{
+		std::cout << this->_name << " couldn't sign form because it was already signed." << std::endl;
+		return ;
+	}
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->_name << " signed " << form.getName() << std::endl;
+	}
+	catch (std::exception & e)
+	{
+		std::cout << this->_name << " couldn't sign " << form.getName() << " because of insufficient permissions" << std::endl;
+	}
 }
 
 std::ostream&	Bureaucrat::operator<<(std::ostream& out)	const

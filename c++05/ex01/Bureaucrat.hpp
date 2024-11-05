@@ -23,7 +23,7 @@ class Bureaucrat
 	void				downGrade();
 	void				upGrade();
 
-	void				signForm(const Form& Form)	const;
+	void				signForm(Form& form);
 	std::ostream&		operator<<(std::ostream& out)	const;
 
 	class GradeTooHighException : public std::runtime_error
