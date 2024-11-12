@@ -1,7 +1,13 @@
 #pragma once
 
+#include <cstring>
 #include <iostream>
+#include <iomanip>
 #include <string>
+#include <cstdlib>
+#include <cctype>
+#include <sstream>
+#include <cfloat>
 
 class ScalarConverter
 {
@@ -13,4 +19,9 @@ class ScalarConverter
 	~ScalarConverter() = delete;
 	
 	static void	convert(const std::string& input);
+
+	private:
+	
+	static void	printOutput(const std::string (&output)[4]);
+	static void	printError();
 };
