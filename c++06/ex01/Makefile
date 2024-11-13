@@ -1,9 +1,9 @@
-NAME	=	convert
+NAME	=	serialize
 RM		=	rm -rf
 CC		=	c++
 CFLAGS	=	-Wall -Werror -Wextra -std=c++17 -g
 SRCS	=	main.cpp \
-			ScalarConverter.cpp \
+			Serializer.cpp \
 
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	=	objects
