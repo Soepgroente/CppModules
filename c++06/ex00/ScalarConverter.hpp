@@ -8,6 +8,8 @@
 #include <cctype>
 #include <sstream>
 #include <cfloat>
+#include <limits>
+#include <cmath>
 
 class ScalarConverter
 {
@@ -23,5 +25,4 @@ class ScalarConverter
 	private:
 	
 	static void	printOutput(const std::string (&output)[4]);
-	static void	printError();
 };

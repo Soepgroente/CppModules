@@ -1,5 +1,6 @@
 #include "ScalarConverter.hpp"
 
+
 enum	types
 {
 	CHAR,
@@ -16,7 +17,8 @@ static bool	withinAscii(int c)
 
 static void	handleCharacter(std::string &charString, int input)
 {
-	if (std::isprint(input))
+	std::cout << input << std::endl;
+	if (std::isprint(input) == true)
 		charString += static_cast<char> (input);
 	else if (withinAscii(input) == true)
 		charString += "non displayable";
@@ -55,7 +57,7 @@ static bool	inputIsInfinite(const std::string& input, std::string (&output)[4])
 
 static bool	inputIsChar(const std::string& input, std::string (&output)[4])
 {
-	if (input[0] == '\'' && input[2] == '\'' && std::isprint(input[1]) == true)
+	if (input[0] == '\'' && std::isprint(input[1]) == true && input[2] == '\'')
 	{
 		output[CHAR] += input[1];
 		output[INT] += std::to_string(static_cast<int>(input[1]));
@@ -113,10 +115,17 @@ static bool	inputIsFloat(const std::string& input, std::string (&output)[4])
 		std::exit(EXIT_FAILURE);
 	}
 	handleCharacter(output[CHAR], static_cast<int> (conversion));
-	if (static_cast<long> (conversion) > INT_MAX || static_cast<long> (conversion) < INT_MIN)
+	if (static_cast<long> (conversion) > std::numeric_limits<int>::max() || \
+		static_cast<long> (conversion) < std::numeric_limits<int>::min())
+	{
 		output[INT] += "integer overflow";
+		output[CHAR] += "impossible";
+	}
 	else	
+	{
+		handleCharacter(output[CHAR], static_cast<int> (conversion));
 		output[INT] += std::to_string(static_cast<int> (conversion));
+	}
 	output[FLOAT] += std::to_string(conversion);
 	output[DOUBLE] += std::to_string(static_cast<double> (conversion));
 	return (true);
@@ -140,11 +149,17 @@ static bool	inputIsDouble(const std::string& input, std::string (&output)[4])
 		std::cerr << "Error: overflow of double (seriously? That's impressive), could not convert" << std::endl;
 		std::exit(EXIT_FAILURE);
 	}
-	handleCharacter(output[CHAR], static_cast<int> (conversion));
-	if (static_cast<long> (conversion) > INT_MAX || static_cast<long> (conversion) < INT_MIN)
+	if (static_cast<long> (conversion) > std::numeric_limits<int>::max() || \
+		static_cast<long> (conversion) < std::numeric_limits<int>::min())
+	{
 		output[INT] += "integer overflow";
+		output[CHAR] += "impossible";
+	}
 	else	
+	{
+		handleCharacter(output[CHAR], static_cast<int> (conversion));
 		output[INT] += std::to_string(static_cast<int> (conversion));
+	}
 	output[FLOAT] += std::to_string(static_cast<float> (conversion));
 	output[DOUBLE] += std::to_string(conversion);
 	return (true);
