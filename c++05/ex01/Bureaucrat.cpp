@@ -12,15 +12,6 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade
 	}
 }
 
-Bureaucrat::~Bureaucrat()
-{
-}
-
-void	Bureaucrat::setGrade(int grade)
-{
-	this->_grade = grade;
-}
-
 const std::string&	Bureaucrat::getName()	const
 {
 	return (_name);
@@ -47,25 +38,20 @@ void	Bureaucrat::downGrade()
 
 void	Bureaucrat::signForm(Form& form)
 {
-	if (form.getSignedStatus() == true)
-	{
-		std::cout << this->_name << " couldn't sign form because it was already signed." << std::endl;
-		return ;
-	}
 	try
 	{
 		form.beSigned(*this);
 		std::cout << this->_name << " signed " << form.getName() << std::endl;
 	}
-	catch (std::exception & e)
+	catch (std::exception& e)
 	{
-		std::cout << this->_name << " couldn't sign " << form.getName() << " because of insufficient permissions" << std::endl;
+		std::cout << this->_name << " couldn't sign " << form.getName() << " because form is already signed or insufficient permissions" << std::endl;
 	}
 }
 
-std::ostream&	Bureaucrat::operator<<(std::ostream& out)	const
+std::ostream&	operator<<(std::ostream& out, const Bureaucrat& bureaucrat)
 {
-	out << "Name: " << this->getName() << "\nGrade " << this->getGrade() << std::endl;
+	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << "." << std::endl;
 	return (out);
 }
 

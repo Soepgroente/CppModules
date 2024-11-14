@@ -44,22 +44,24 @@ bool	Form::getSignedStatus()	const
 
 void	Form::beSigned(const Bureaucrat& Bureaucrat)
 {
-	if (Bureaucrat.getGrade() <= signGrade)
+	if (Bureaucrat.getGrade() > signGrade)
+		throw GradeTooLowException();
+	else if (_signed == true)
 	{
-		_signed = true;
+		throw FormAlreadySignedException();
 	}
 	else
-		throw GradeTooLowException();
+		_signed = true;
 }
 
-std::ostream&	Form::operator<<(std::ostream& out)
+std::ostream&		operator<<(std::ostream& out, const Form& form)
 {
 	std::string	signedstatus = "signed";
 
-	if (_signed == false)
+	if (form.getSignedStatus() == false)
 		signedstatus = "un" + signedstatus;
-	out << "Form name: " << this->getName() << "\nForm sign grade:" << this->getSignGrade();
-	out << "\nForm execution grade:" << this->getExecGrade() << "\nSign status: " << signedstatus << std::endl;
+	out << "Form name: " << form.getName() << "\nForm sign grade: " << form.getSignGrade();
+	out << "\nForm execution grade:" << form.getExecGrade() << "\nSign status: " << signedstatus << std::endl;
 	return (out);
 }
 
@@ -68,5 +70,9 @@ Form::GradeTooHighException::GradeTooHighException() : std::runtime_error("Grade
 }
 
 Form::GradeTooLowException::GradeTooLowException() : std::runtime_error("Grade too low")
+{
+}
+
+Form::FormAlreadySignedException::FormAlreadySignedException() : std::runtime_error("Form already signed")
 {
 }

@@ -12,19 +12,17 @@ class Bureaucrat
 	public:
 	
 	Bureaucrat() = delete;
-	~Bureaucrat();
+	~Bureaucrat() = default;
 	Bureaucrat(const std::string& name, int grade);
 	Bureaucrat(const Bureaucrat& original) = delete;
 	Bureaucrat&	operator=(const Bureaucrat& original) = delete;
 
-	void				setGrade(int grade);
 	const std::string&	getName()	const;
 	int					getGrade()	const;
 	void				downGrade();
 	void				upGrade();
 
 	void				signForm(Form& form);
-	std::ostream&		operator<<(std::ostream& out)	const;
 
 	class GradeTooHighException : public std::runtime_error
 	{
@@ -43,3 +41,5 @@ class Bureaucrat
 	const std::string	_name;
 	int					_grade;
 };
+
+std::ostream&		operator<<(std::ostream& out, const Bureaucrat& bureaucrat);

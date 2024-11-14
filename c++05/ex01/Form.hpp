@@ -23,7 +23,6 @@ class Form
 	const std::string&	getName()	const;
 
 	void				beSigned(const Bureaucrat& Bureaucrat);
-	std::ostream&		operator<<(std::ostream& out);
 
 	class GradeTooHighException : public std::runtime_error
 	{
@@ -37,6 +36,12 @@ class Form
 		GradeTooLowException();
 	};
 
+	class FormAlreadySignedException : public std::runtime_error
+	{
+		public:
+		FormAlreadySignedException();
+	};
+
 	private:
 
 	const std::string	_name;
@@ -44,3 +49,5 @@ class Form
 	const int			execGrade;
 	bool				_signed;
 };
+
+std::ostream&		operator<<(std::ostream& out, const Form& form);

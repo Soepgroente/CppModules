@@ -12,15 +12,6 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade
 	}
 }
 
-Bureaucrat::~Bureaucrat()
-{
-}
-
-void	Bureaucrat::setGrade(int grade)
-{
-	this->_grade = grade;
-}
-
 const std::string&	Bureaucrat::getName()	const
 {
 	return (_name);
