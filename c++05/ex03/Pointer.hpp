@@ -1,6 +1,9 @@
 #pragma once
 
 #include "AForm.hpp"
+#include <iostream>
+
+class AForm;
 
 class Pointer
 {

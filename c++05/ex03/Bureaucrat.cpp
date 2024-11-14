@@ -16,11 +16,6 @@ Bureaucrat::~Bureaucrat()
 {
 }
 
-void	Bureaucrat::setGrade(int grade)
-{
-	this->_grade = grade;
-}
-
 const std::string&	Bureaucrat::getName()	const
 {
 	return (_name);
@@ -47,25 +42,33 @@ void	Bureaucrat::downGrade()
 
 void	Bureaucrat::signForm(AForm& form)
 {
-	if (form.getSignedStatus() == true)
-	{
-		std::cout << this->_name << " couldn't sign " << form.getName() << " because it was already signed" << std::endl;
-		return ;
-	}
 	try
 	{
 		form.beSigned(*this);
 		std::cout << this->_name << " signed " << form.getName() << std::endl;
 	}
-	catch (std::exception & e)
+	catch (std::exception& e)
 	{
-		std::cout << "Couldn't sign form, incorrect permissions." << std::endl;
+		std::cerr << this->_name << " couldn't sign " << form.getName() << " because form is already signed or insufficient permissions" << std::endl;
 	}
 }
 
-std::ostream&	Bureaucrat::operator<<(std::ostream& out)	const
+void	Bureaucrat::executeForm(const AForm& form)
 {
-	out << "Name: " << this->getName() << "\nGrade " << this->getGrade() << std::endl;
+	try
+	{
+		form.execute(*this);
+		std::cout << this->_name << " executed " << form.getName() << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << this->_name << " couldn't executed " << form.getName() << " because form is not signed or insufficient permissions" << std::endl;
+	}
+}
+
+std::ostream&	operator<<(std::ostream& out, const Bureaucrat& bureaucrat)
+{
+	out << "Name: " << bureaucrat.getName() << "\nGrade " << bureaucrat.getGrade() << std::endl;
 	return (out);
 }
 

@@ -17,4 +17,10 @@ class Intern
 	Intern&	operator=(const Intern& original) = delete;
 
 	AForm*	makeForm(const std::string& formName, const std::string& formTarget);
+
+	class FormCreationError : public std::runtime_error
+	{
+		public:
+		FormCreationError();
+	};
 };

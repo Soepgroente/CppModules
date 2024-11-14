@@ -49,7 +49,7 @@ void	Bureaucrat::signForm(AForm& form)
 	}
 	catch (std::exception& e)
 	{
-		std::cout << this->_name << " couldn't sign " << form.getName() << " because form is already signed or insufficient permissions" << std::endl;
+		std::cerr << this->_name << " couldn't sign " << form.getName() << " because form is already signed or insufficient permissions" << std::endl;
 	}
 }
 
@@ -62,7 +62,7 @@ void	Bureaucrat::executeForm(const AForm& form)
 	}
 	catch (std::exception& e)
 	{
-		std::cout << this->_name << " couldn't executed " << form.getName() << " because form is not signed or insufficient permissions" << std::endl;
+		std::cerr << this->_name << " couldn't executed " << form.getName() << " because form is not signed or insufficient permissions" << std::endl;
 	}
 }
 

@@ -1,7 +1,8 @@
 #pragma once
 
 #include "AForm.hpp"
-#include <iostream>
+
+class AForm;
 
 class PresidentialPardonForm : public AForm
 {
@@ -13,11 +14,10 @@ class PresidentialPardonForm : public AForm
 	PresidentialPardonForm(const PresidentialPardonForm& original) = delete;
 	PresidentialPardonForm&	operator=(const PresidentialPardonForm& original) = delete;
 
-	void	executeForm(const Bureaucrat& Bureaucrat)	override;
+	void	executeForm()	const override;
 
 	private:
 
-	void				pardon(const Bureaucrat& Bureaucrat);
 	static const int	sign = 25;
 	static const int	exec = 5;
 	const std::string	_target;

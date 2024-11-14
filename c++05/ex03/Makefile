@@ -1,4 +1,4 @@
-NAME	=	Form
+NAME	=	Intern
 RM		=	rm -rf
 CC		=	c++
 CFLAGS	=	-Wall -Werror -Wextra -std=c++17 -g

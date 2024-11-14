@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AForm.hpp"
+#include <iostream>
 
 class RobotomyRequestForm : public AForm
 {
@@ -12,11 +13,10 @@ class RobotomyRequestForm : public AForm
 	RobotomyRequestForm(const RobotomyRequestForm& original) = delete;
 	RobotomyRequestForm&	operator=(const RobotomyRequestForm& original) = delete;
 
-	void	executeForm(const Bureaucrat& Bureaucrat)	override;
+	void	executeForm()	const override;
 
 	private:
 
-	void				robotomize(const Bureaucrat& Bureaucrat);
 	static const int	sign = 72;
 	static const int	exec = 45;
 	const std::string	_target;

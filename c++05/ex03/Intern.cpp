@@ -17,10 +17,9 @@ static AForm*	createShrubbery(const std::string& target)
 
 AForm*	Intern::makeForm(const std::string& formName, const std::string& formTarget)
 {
-	const std::string names[3] = \
-		{"presidential pardon", "robotomy request", "shrubbery creation"};
-	AForm*	(*f[3])(const std::string&) = \
-		{&createPardon, &createRobotomy, &createShrubbery};
+	const std::string names[3] = {"presidential pardon", "robotomy request", "shrubbery creation"};
+
+	AForm*	(*f[3])(const std::string&) = {&createPardon, &createRobotomy, &createShrubbery};
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -30,6 +29,9 @@ AForm*	Intern::makeForm(const std::string& formName, const std::string& formTarg
 			return (f[i](formTarget));
 		}
 	}
-	std::string	errorMessage = "Form " + formName + " not found";
-	throw std::runtime_error(errorMessage);
+	throw FormCreationError();
+}
+
+Intern::FormCreationError::FormCreationError() : std::runtime_error("Form not found")
+{
 }
