@@ -27,7 +27,7 @@ class Form
 	class GradeTooHighException : public std::runtime_error
 	{
 		public:
-		GradeTooHighException(); 
+		GradeTooHighException();
 	};
 
 	class GradeTooLowException : public std::runtime_error

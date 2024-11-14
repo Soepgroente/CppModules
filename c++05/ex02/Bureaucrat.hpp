@@ -1,9 +1,9 @@
 #pragma once
 
 #include "AForm.hpp"
+#include <stdexcept>
 #include <iostream>
 #include <exception>
-#include <stdexcept>
 
 class AForm;
 
@@ -17,14 +17,13 @@ class Bureaucrat
 	Bureaucrat(const Bureaucrat& original) = delete;
 	Bureaucrat&	operator=(const Bureaucrat& original) = delete;
 
-	void				setGrade(int grade);
 	const std::string&	getName()	const;
 	int					getGrade()	const;
 	void				downGrade();
 	void				upGrade();
 
 	void				signForm(AForm& Form);
-	std::ostream&		operator<<(std::ostream& out)	const;
+	void				executeForm(const AForm& Form);
 
 	class GradeTooHighException : public std::runtime_error
 	{
@@ -43,3 +42,5 @@ class Bureaucrat
 	const std::string	_name;
 	int					_grade;
 };
+
+std::ostream&		operator<<(std::ostream& out, const Bureaucrat& bureaucrat);

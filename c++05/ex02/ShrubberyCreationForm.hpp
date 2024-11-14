@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AForm.hpp"
+#include <iostream>
 
 class ShrubberyCreationForm : public AForm
 {
@@ -12,11 +13,10 @@ class ShrubberyCreationForm : public AForm
 	ShrubberyCreationForm(const ShrubberyCreationForm& original) = delete;
 	ShrubberyCreationForm&	operator=(const ShrubberyCreationForm& original) = delete;
 
-	void	executeForm(const Bureaucrat& bureaucrat)	override;
+	void	executeForm()	const override;
 
 	private:
 
-	void			sheerShrubbery();
 	static const int	sign = 145;
 	static const int	exec = 137;
 	const std::string	_target;

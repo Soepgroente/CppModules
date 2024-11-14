@@ -1,4 +1,4 @@
-#include "AForm.hpp"
+#include "classHeader.hpp"
 
 AForm::AForm(const std::string& name, int sign, int exec) : _name(name), signGrade(sign), execGrade(exec), _signed(false)
 {
@@ -32,26 +32,32 @@ bool	AForm::getSignedStatus()	const
 	return (_signed);
 }
 
+void	AForm::execute(const Bureaucrat& executor)	const
+{
+	if (this->getSignedStatus() == false)
+		throw FormNotSignedException();
+	if (executor.getGrade() > signGrade)
+		throw GradeTooLowException();
+	this->executeForm();
+}
+
 void	AForm::beSigned(const Bureaucrat& bureaucrat)
 {
 	if (this->getSignedStatus() == true)
-	{
-		std::cout << this->_name << " couldn't sign form because it was already signed." << std::endl;
-		return ;
-	}
+		throw FormNotSignedException();
 	if (bureaucrat.getGrade() > signGrade)
 		throw GradeTooLowException();
 	_signed = true;
 }
 
-std::ostream&	AForm::operator<<(std::ostream& out)
+std::ostream&		operator<<(std::ostream& out, const AForm& form)
 {
 	std::string	signedstatus = "signed";
 
-	if (_signed == false)
+	if (form.getSignedStatus() == false)
 		signedstatus = "un" + signedstatus;
-	out << "AForm name: " << this->getName() << "\nAForm sign grade:" << this->getSignGrade();
-	out << "\nAForm execution grade:" << this->getExecGrade() << "\nSign status: " << signedstatus << std::endl;
+	out << "Form name: " << form.getName() << "\nForm sign grade: " << form.getSignGrade();
+	out << "\nForm execution grade:" << form.getExecGrade() << "\nSign status: " << signedstatus << std::endl;
 	return (out);
 }
 

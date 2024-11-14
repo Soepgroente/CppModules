@@ -19,10 +19,10 @@ int main()
 	// Pointer	smartInvalid(jan.makeForm("lka;j;ejsalkeflsaf", "Dolores"));
 	Bureaucrat god("God", 1);
 
-	god.signForm(*smartpp.form);
-	smartpp.form->executeForm(god);
-	god.signForm(*smartsc.form);
-	smartsc.form->executeForm(god);
-	god.signForm(*smartrr.form);
-	smartrr.form->executeForm(god);
+	god.signForm(smartpp.obj());
+	smartpp.obj().executeForm(god);
+	god.signForm(smartsc.obj());
+	smartsc.obj().executeForm(god);
+	god.signForm(smartrr.obj());
+	smartrr.obj().executeForm(god);
 }

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Bureaucrat.hpp"
+#include <stdexcept>
 #include <iostream>
 #include <exception>
-#include <stdexcept>
 
 class Bureaucrat;
 
@@ -22,9 +22,9 @@ class AForm
 	bool 				getSignedStatus()	const;
 	const std::string&	getName()	const;
 
-	void				beSigned(const Bureaucrat& Bureaucrat);
-	virtual void		executeForm(const Bureaucrat& Bureaucrat) = 0;
-	std::ostream&		operator<<(std::ostream& out);
+	void				beSigned(const Bureaucrat& bureaucrat);
+	void				execute(const Bureaucrat& executor)	const;
+	virtual void		executeForm() const = 0;
 
 	class GradeTooHighException : public std::runtime_error
 	{
@@ -51,3 +51,5 @@ class AForm
 	const int			execGrade;
 	bool				_signed;
 };
+
+std::ostream&		operator<<(std::ostream& out, const AForm& form);
