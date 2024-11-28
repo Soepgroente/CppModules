@@ -1,7 +1,7 @@
 NAME	=	iter
 RM		=	rm -rf
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++11 -g -fsanitize=address
+CFLAGS	=	-Wall -Werror -Wextra -std=c++17 #-g -fsanitize=address
 SRCS	=	main.cpp
 
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)

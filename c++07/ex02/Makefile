@@ -1,7 +1,7 @@
-NAME	=	whatever
+NAME	=	array
 RM		=	rm -rf
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++17
+CFLAGS	=	-Wall -Werror -Wextra -std=c++17 #-g -fsanitize=address
 SRCS	=	main.cpp
 
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)
