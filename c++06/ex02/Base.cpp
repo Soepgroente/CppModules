@@ -4,6 +4,8 @@
 #include "B.hpp"
 #include "C.hpp"
 
+/*	Dynamic cast is specifically for downcasting in abstract classes to ensure you get the right derived class	*/
+
 static Base*	classA()
 {
 	Base*	random = new A;

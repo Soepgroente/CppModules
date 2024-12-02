@@ -1,5 +1,7 @@
 #include "ScalarConverter.hpp"
 
+/*	Static cast converts the value of whatever you're casting to the new data type	*/
+
 enum	types
 {
 	CHAR,
