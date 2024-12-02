@@ -47,7 +47,7 @@ class Array
 		return(_array[index]);
 	}
 
-	T&			operator[](uint32_t index)
+	T&	operator[](uint32_t index)
 	{
 		if (index >= this->size())
 			throw std::out_of_range("Index out of bounds");
