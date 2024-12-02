@@ -14,9 +14,14 @@ static bool	withinAscii(int c)
 	return (c >= 0 && c <= 127);
 }
 
+static bool	isPrintable(int c)
+{
+	return (c >= 32 && c <= 126);
+}
+
 static void	handleCharacter(std::string &charString, int input)
 {
-	if (std::isprint(input) != 0)
+	if (isPrintable(input) == true)
 	{
 		charString += "\'";
 		charString += static_cast<char> (input);
@@ -125,11 +130,9 @@ static bool	inputIsFloat(const std::string& input, std::string (&output)[4])
 		static_cast<long> (conversion) < std::numeric_limits<int>::min())
 	{
 		output[INT] += "integer overflow";
-		output[CHAR] += "impossible";
 	}
 	else	
 	{
-		handleCharacter(output[CHAR], static_cast<int> (conversion));
 		output[INT] += std::to_string(static_cast<int> (conversion));
 	}
 	output[FLOAT] += std::to_string(conversion);
