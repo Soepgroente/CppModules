@@ -33,7 +33,7 @@ class Array
 		if (this == &original)
 			return (*this);
 		this->_array = new T[original.size()];
-		for (int i = 0; i < original.size(); i++)
+		for (uint32_t i = 0; i < original.size(); i++)
 		{
 			this->_array[i] = original._array[i];
 		}
