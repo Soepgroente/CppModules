@@ -1,8 +1,10 @@
 #include "Span.hpp"
+#include <random>
+#include <climits>
 
 Span::Span(uint32_t N) : maxSize(N)
 {
-	array.reserve(N);
+	// array.reserve(N);
 	size = 0;
 }
 
@@ -34,20 +36,20 @@ void	Span::eraseNumber(size_t index)
 	size--;
 }
 
-size_t	Span::getPopulatedSize()	const
+size_t	Span::getSize()	const
 {
 	return (size);
 }
 
-size_t	Span::getSize()	const
+size_t	Span::getMaxSize()	const
 {
 	return (maxSize);
 }
 
 void	Span::print()	const
 {
-	for (size_t i = 0; i < array.size(); i++)
-		std::cout << array[i];
+	for (size_t i = 0; i < getSize(); i++)
+		std::cout << array[i] << " ";
 	std::cout << std::endl;
 }
 
@@ -56,18 +58,18 @@ int		Span::shortestSpan()	const
 	if (size < 2)
 		throw std::length_error("Array too small to have a span");
 	std::vector<int>	tmp = array;
+	int result = INT_MAX;
 
 	std::sort(tmp.begin(), tmp.end());
-	int result = tmp[1] - tmp[0];
 
-	for (size_t i = 2; i < tmp.size(); i++)
+	for (size_t i = 1; i < tmp.size(); i++)
 	{
 		result = std::min(result, tmp[i] - tmp[i - 1]);
 	}
 	return (result);
 }
 
-int		Span::largestSpan()	const
+int		Span::longestSpan()	const
 {
 	if (size < 2)
 		throw std::length_error("Array too small to have a span");
@@ -75,5 +77,17 @@ int		Span::largestSpan()	const
 	std::pair<std::vector<int>::const_iterator, std::vector<int>::const_iterator> res;
 	
 	res = std::minmax_element(array.begin(), array.end());
-	return (*res.second - *res.first);
+	return (std::abs(*res.second - *res.first));
+}
+
+void	Span::populate()
+{
+	static	std::mt19937	generator{std::random_device{}()};
+	static	std::uniform_int_distribution<int> randomInt(INT_MIN, INT_MAX);
+
+	for (size_t i = getSize(); i < getMaxSize(); i++)
+	{
+		array.push_back(randomInt(generator));
+	}
+	size = maxSize;
 }

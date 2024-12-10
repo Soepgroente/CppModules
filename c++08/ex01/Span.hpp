@@ -17,11 +17,12 @@ class Span
 	void	addNumber(int num);
 	void	eraseNumber(size_t index);
 	size_t	getSize()	const;
-	size_t	getPopulatedSize()	const;
+	size_t	getMaxSize()	const;
+	void	populate();
 	void	print()	const;
 
 	int		shortestSpan()	const;
-	int		largestSpan()	const;
+	int		longestSpan()	const;
 
 	private:
 	std::vector<int>	array;
