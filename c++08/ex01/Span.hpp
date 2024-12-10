@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include <utility>
 
 class Span
 {
@@ -16,6 +17,7 @@ class Span
 	void	addNumber(int num);
 	void	eraseNumber(size_t index);
 	size_t	getSize()	const;
+	size_t	getPopulatedSize()	const;
 	void	print()	const;
 
 	int		shortestSpan()	const;

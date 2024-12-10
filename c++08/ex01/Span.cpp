@@ -22,7 +22,7 @@ void	Span::addNumber(int num)
 {
 	if (size == maxSize)
 		throw std::out_of_range("Amount of elements exceeds defined size");
-	array.emplace_back(num);
+	array.push_back(num);
 	size++;
 }
 
@@ -34,9 +34,14 @@ void	Span::eraseNumber(size_t index)
 	size--;
 }
 
-size_t	Span::getSize()	const
+size_t	Span::getPopulatedSize()	const
 {
 	return (size);
+}
+
+size_t	Span::getSize()	const
+{
+	return (maxSize);
 }
 
 void	Span::print()	const
@@ -66,7 +71,9 @@ int		Span::largestSpan()	const
 {
 	if (size < 2)
 		throw std::length_error("Array too small to have a span");
-	int min = *std::min_element(array.begin(), array.end());
-	int max = *std::max_element(array.begin(), array.end());
-	return (max - min);
+
+	std::pair<std::vector<int>::const_iterator, std::vector<int>::const_iterator> res;
+	
+	res = std::minmax_element(array.begin(), array.end());
+	return (*res.second - *res.first);
 }

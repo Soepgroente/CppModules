@@ -11,4 +11,5 @@ int main()
 	}
 	std::cout << "3 in array index: " << tp::easyfind(array, 3) << std::endl;
 	std::cout << "40 in vector index: " << tp::easyfind(vec, 40) << std::endl;
+	std::cout << "41 in vector index: " << tp::easyfind(vec, 41) << std::endl;
 }

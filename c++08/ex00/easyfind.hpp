@@ -6,8 +6,13 @@
 namespace tp
 {
 	template <typename T>
-	int	easyfind(T& container, int toFind)
+	size_t	easyfind(T& container, int toFind)
 	{
-		return (std::find(container.begin(), container.end(), toFind) - container.begin());
+		typename T::iterator	it;
+
+		it = std::find(container.begin(), container.end(), toFind);
+		if (it == container.end())
+			return (SIZE_MAX);
+		return (it - container.begin());
 	}
 }

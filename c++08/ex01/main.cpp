@@ -8,6 +8,14 @@ int main()
 	{
 		original.addNumber(i);
 	}
+	try
+	{
+		original.addNumber(82523);
+	}
+	catch (std::out_of_range& e)
+	{
+		std::cerr << "Whoops, array is full" << std::endl;
+	}
 	Span	copy = original;
 
 	original.print();
