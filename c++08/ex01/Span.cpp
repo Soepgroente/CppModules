@@ -4,7 +4,6 @@
 
 Span::Span(uint32_t N) : maxSize(N)
 {
-	// array.reserve(N);
 	size = 0;
 }
 
@@ -13,6 +12,7 @@ Span::Span(const Span& original)
 	if (this != &original)
 		*this = original;
 }
+
 Span&	Span::operator=(const Span& original)
 {
 	this->size = original.size;

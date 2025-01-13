@@ -25,6 +25,7 @@ class Span
 	int		longestSpan()	const;
 
 	private:
+
 	std::vector<int>	array;
 	size_t				size;
 	size_t				maxSize;
