@@ -25,6 +25,11 @@ static bool	checkYear(int year)
 	return (year <= 2025);
 }
 
+static bool	isPriceValid(float price)
+{
+	return (price >= 0.0f && price <= 1000.0f);
+}
+
 static bool	isDateValid(const std::string& date)
 {
 	std::regex	datePattern(R"((\d{4})-(\d{2})-(\d{2}))");
@@ -61,22 +66,69 @@ BitcoinExchange::BitcoinExchange(const std::string& filePath)
 		std::istringstream stream(line);
 		
 		stream >> date >> dummy >> price;
-		if (stream >> dummy)
-			throw std::runtime_error("Invalid file format");
-		if (date)
+		if (dummy != "|" || stream >> dummy)
+		{
+			std::cerr << "Error: bad input" << std::endl;
+			std::exit(EXIT_FAILURE);
+		}
+		input.insert(std::make_pair(date, price));
 	}
 }
-/*
-$> ./btc
-Error: could not open file.
-$> ./btc input.txt
-2011-01-03 => 3 = 0.9
-2011-01-03 => 2 = 0.6
-2011-01-03 => 1 = 0.3
-2011-01-03 => 1.2 = 0.36
-2011-01-09 => 1 = 0.32
-Error: not a positive number.
-Error: bad input => 2001-42-42
-2012-01-11 => 1 = 7.1
-Error: too large a number.
-$>*/
+
+void	BitcoinExchange::parseDatabase()
+{
+	std::fstream file("data.csv");
+	std::string line;
+
+	if (file.is_open() == false)
+	{
+		std::cerr << "Error: could not open file." << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+	std::getline(file, line); // skip the first line
+	while (std::getline(file, line))
+	{
+		database.insert(std::make_pair(line.substr(0, line.find_first_of(',') + 1), std::stof(line.substr(line.find_first_of(',') + 1))));
+	}
+	file.close();
+}
+
+static bool	checkInputLine(const std::pair<std::string, std::string>& input)
+{
+	if (isDateValid(input.first) == false || input.second.size() == 0)
+	{
+		std::cout << "Error: bad input" << input.first << " " << input.second << std::endl;
+		return (false);
+	}
+	try
+	{
+		if (isPriceValid(std::stof(input.second)) == false)
+			throw std::out_of_range("incorrect value");
+	}
+	catch (std::invalid_argument& e)
+	{
+		std::cout << "Error: number incorrectly formatted: " << input.second << std::endl;
+		return (false);
+	}
+	catch (std::out_of_range& e)
+	{
+		if (input.second[0] == '-')
+			std::cout << "Error: not a positive number" << input.second << std::endl;
+		else
+			std::cout << "Error: number too large" << input.second << std::endl;
+		return (false);
+	}
+	return (true);
+}
+
+void	BitcoinExchange::run()
+{
+	parseDatabase();
+
+	for (const std::pair<std::string, std::string>& it : input)
+	{
+		if (checkInputLine(it) == false)
+			continue ;
+		
+	}
+}
