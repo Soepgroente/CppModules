@@ -2,7 +2,7 @@
 
 static bool	checkDay(int year, int day, int month)
 {
-	if (day < 0 || day > 31)
+	if (day <= 0 || day > 31)
 		return (false);
 	if (month == 2)
 	{
@@ -17,7 +17,7 @@ static bool	checkDay(int year, int day, int month)
 
 static bool	checkMonth(int month)
 {
-	return (month >= 0 && month <= 12);
+	return (month >= 1 && month <= 12);
 }
 
 static bool	checkYear(int year)
@@ -25,110 +25,144 @@ static bool	checkYear(int year)
 	return (year <= 2025);
 }
 
-static bool	isPriceValid(float price)
+bool	BitcoinExchange::isDateValid(const std::string& date)
 {
-	return (price >= 0.0f && price <= 1000.0f);
-}
+	std::string	firstDate = database.begin()->first;
+	std::string	lastDate = database.rbegin()->first;
 
-static bool	isDateValid(const std::string& date)
-{
-	std::regex	datePattern(R"((\d{4})-(\d{2})-(\d{2}))");
-	std::smatch	matches;
-
-	if (std::regex_match(date, matches, datePattern))
+	if (firstDate.substr(0, 4) > date.substr(0, 4) || lastDate.substr(0, 4) < date.substr(0, 4))
+		return (false);
+	try
 	{
-		int year = std::stoi(matches[1].str());
-		int month = std::stoi(matches[2].str());
-		int day = std::stoi(matches[3].str());
-
-		if (checkYear(year) && checkMonth(month) && checkDay(year, day, month))
-			return (true);
+		int year = std::stoi(date.substr(0, 4));
+		int month = std::stoi(date.substr(5, 2));
+		int day = std::stoi(date.substr(8, 2));
+		
+		if (date.size() != 10 || date[4] != '-' || date[7] != '-')
+			return (false);
+		return (checkYear(year) == true && checkMonth(month) == true && checkDay(year, day, month) == true);
 	}
-	return (false);
+	catch (std::exception& e)
+	{
+		return (false);
+	}
 }
+
+/*	Parses database. Then input file line by line, printing result or error messages when there's something wrong.
+	Skips first line which holds no data	*/
 
 BitcoinExchange::BitcoinExchange(const std::string& filePath)
 {
-	std::ifstream	file(filePath);
+	std::ifstream	file("./" + filePath);
 	std::string 	line;
-	std::string 	date;
-	std::string		price;
-	std::string		dummy;
+
+	parseCsv();
 
 	if (file.is_open() == false)
 	{
-		std::cerr << "Error: Could not open file." << std::endl;
+		std::cerr << "Error: Could not open file: " << filePath << std::endl;
 		return ;
 	}
 
+	std::getline(file, line);
 	while (std::getline(file, line))
 	{
-		std::istringstream stream(line);
+		std::istringstream	stream(line);
+		std::string 		date;
+		std::string			price;
+		std::string			dummy;
+		std::string			dummy2;
+		float				priceFloat;
 		
-		stream >> date >> dummy >> price;
-		if (dummy != "|" || stream >> dummy)
+		stream >> date >> dummy >> price >> dummy2;
+
+		try
 		{
-			std::cerr << "Error: bad input" << std::endl;
-			std::exit(EXIT_FAILURE);
+			if (dummy != "|" || dummy2.empty() == false)
+			{
+				throw std::runtime_error("bad input");
+			}
+			priceFloat = std::stof(price);
 		}
-		input.insert(std::make_pair(date, price));
+		catch (std::exception& e)
+		{
+			date = "Error: bad input => " + date;
+			priceFloat = 1.0f;
+		}
+		if (priceFloat < 0)
+		{
+			std::cout << "Error: not a positive number" << std::endl;
+		}
+		else if (priceFloat > 1000)
+		{
+			std::cout << "Error: too large a number" << std::endl;
+		}
+		else if (date[0] == 'E')
+		{
+			std::cout << date << " " << dummy << " " << price << std::endl;
+		}
+		else if (isDateValid(date) == false)
+		{
+			std::cout << "Error: bad input => " << date << " " << dummy << " " << price << std::endl;
+		}
+		else
+		{
+			std::cout << date << " => " << price << " = " << getTotalAmount(date, price) << std::endl;
+		}
 	}
 }
 
-void	BitcoinExchange::parseDatabase()
+/*	No error checking on the data as the database is provided by the subject and static.
+	Skips first line which holds no data	*/
+
+void	BitcoinExchange::parseCsv()
 {
-	std::fstream file("data.csv");
-	std::string line;
+	std::fstream	file("data.csv");
+	std::string		line;
 
 	if (file.is_open() == false)
 	{
-		std::cerr << "Error: could not open file." << std::endl;
+		std::cerr << "Error: could not open data.csv" << std::endl;
 		std::exit(EXIT_FAILURE);
 	}
-	std::getline(file, line); // skip the first line
+	std::getline(file, line);
 	while (std::getline(file, line))
 	{
-		database.insert(std::make_pair(line.substr(0, line.find_first_of(',') + 1), std::stof(line.substr(line.find_first_of(',') + 1))));
+		database.insert(std::make_pair(line.substr(0, line.find_first_of(',')), line.substr(line.find_first_of(',') + 1)));
 	}
 	file.close();
 }
 
-static bool	checkInputLine(const std::pair<std::string, std::string>& input)
-{
-	if (isDateValid(input.first) == false || input.second.size() == 0)
-	{
-		std::cout << "Error: bad input" << input.first << " " << input.second << std::endl;
-		return (false);
-	}
-	try
-	{
-		if (isPriceValid(std::stof(input.second)) == false)
-			throw std::out_of_range("incorrect value");
-	}
-	catch (std::invalid_argument& e)
-	{
-		std::cout << "Error: number incorrectly formatted: " << input.second << std::endl;
-		return (false);
-	}
-	catch (std::out_of_range& e)
-	{
-		if (input.second[0] == '-')
-			std::cout << "Error: not a positive number" << input.second << std::endl;
-		else
-			std::cout << "Error: number too large" << input.second << std::endl;
-		return (false);
-	}
-	return (true);
-}
+/*	Loops through database until the key (date) is later than the requested date to get prices at rounded down dates.	*/
 
-void	BitcoinExchange::run()
+float	BitcoinExchange::getTotalAmount(const std::string& date, const std::string& amount)
 {
-	parseDatabase();
+	float amt = std::stof(amount);
+	float price;
+	int day[2], month[2], year[2];
 
-	for (const std::pair<std::string, std::string>& it : input)
+	year[0] = std::stoi(date.substr(0, 4));
+	month[0] = std::stoi(date.substr(5, 2));
+	day[0] = std::stoi(date.substr(8, 2));
+
+	for (const auto& data : database)
 	{
-		if (checkInputLine(it) == false)
-			continue ;
-		
+		year[1] = std::stoi(data.first.substr(0, 4));
+		month[1] = std::stoi(data.first.substr(5, 2));
+		day[1] = std::stoi(data.first.substr(8, 2));
+		if (year[0] < year[1])
+		{
+			break ;
+		}
+		else if (year[0] == year[1] && month[0] < month[1])
+		{
+			break ;
+		}
+		else if (year[0] == year[1] && month[0] == month[1] && day[0] < day[1])
+		{
+			break ;
+		}
+		price = std::stof(data.second);
 	}
+	return (amt * price);
 }

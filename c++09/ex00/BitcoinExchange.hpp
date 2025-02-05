@@ -20,14 +20,11 @@ class BitcoinExchange
 	BitcoinExchange&	operator=(const BitcoinExchange& other) = delete;
 	~BitcoinExchange() = default;
 	
-	void	run();
-
 	private:
 
-	std::map<std::string, float>	database;
-	std::map<std::string, std::string>	input;
+	std::map<std::string, std::string>		database;
 
-	void	parseDatabase();
+	void	parseCsv();
+	float	getTotalAmount(const std::string& date, const std::string& amount);
+	bool	isDateValid(const std::string& date);
 };
-
-typedef std::map<std::string, float>::const_iterator MapIterator;

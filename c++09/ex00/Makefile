@@ -1,8 +1,9 @@
 NAME	=	bitcoinExchange
 RM		=	rm -rf
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++20 #-g
-SRCS	=	main.cpp \
+CFLAGS	=	-Wall -Werror -Wextra -std=c++20 -g
+SRCS	=	BitcoinExchange.cpp \
+			main.cpp \
 
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	=	objects
