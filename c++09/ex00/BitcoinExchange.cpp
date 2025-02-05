@@ -86,7 +86,7 @@ BitcoinExchange::BitcoinExchange(const std::string& filePath)
 		}
 		catch (std::exception& e)
 		{
-			date = "Error: bad input => " + date;
+			date = "Error: bad input => ";
 			priceFloat = 1.0f;
 		}
 		if (priceFloat < 0)
@@ -99,7 +99,7 @@ BitcoinExchange::BitcoinExchange(const std::string& filePath)
 		}
 		else if (date[0] == 'E')
 		{
-			std::cout << date << " " << dummy << " " << price << std::endl;
+			std::cout << date << line << std::endl;
 		}
 		else if (isDateValid(date) == false)
 		{
