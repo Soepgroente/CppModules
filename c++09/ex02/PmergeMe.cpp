@@ -1,6 +1,6 @@
 #include "PmergeMe.hpp"
 
-using Stopwatch = std::chrono::steady_clock::time_point;
+using Stopwatch = std::chrono::_V2::system_clock::time_point;
 
 static std::time_t	duration(Stopwatch begin, Stopwatch end)
 {

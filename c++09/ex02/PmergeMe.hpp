@@ -23,3 +23,18 @@ void printArray(const Container& container)
 	}
 	std::cout << std::endl;
 }
+
+constexpr const std::vector<size_t>	calculateJacobsthalSequence()
+{
+	std::vector<size_t>	sequence;
+	size_t				num = 0;
+
+	sequence.push_back(0);
+	sequence.push_back(1);
+	for (size_t n = 2; num < INT_MAX; n++)
+	{
+		num = sequence[n - 1] + 2 * sequence[n - 2];
+		sequence.push_back(num);
+	}
+	return (sequence);
+}

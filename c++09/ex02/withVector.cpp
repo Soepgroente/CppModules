@@ -15,63 +15,129 @@
 	one at a time, with a specially chosen insertion ordering described below. 
 	Use binary search in subsequences of S (as described below) to determine the position at which each element should be inserted.	*/
 
-void	mergeBack(std::vector<int>& numbers, size_t left, size_t middle, size_t right)
+static void	binarySearchAndInsert(std::vector<int>& array, int numToInsert, size_t end)
 {
-	std::vector<int>	a;
-	std::vector<int>	b;
-	size_t	i = 0;
-	size_t	leftIndex = middle - left + 1;
-	size_t	rightIndex = right - middle;
+	size_t	half = array.size() / 2;
+	size_t	index = half;
+	size_t	prevIndex = half;
 
-	a.reserve(middle - left + 1);
-	b.reserve(right - middle);
-	for (i = left; i <= middle; i++)
+	while (half > 0 && numToInsert != array[index])
 	{
-		a.push_back(numbers[i]);
-	}
-	for (i = middle + 1; i <= right; i++)
-	{
-		b.push_back(numbers[i]);
-	}
-	size_t j = 0, k = 0;
-
-	for (i = left; j < middle && k < middle; i++)
-	{
-		if (a[j] < b[k])
+		if (numToInsert > array[index])
 		{
-			numbers[left] = a[j];
-			j++;
+			index += half / 2;
 		}
 		else
 		{
-			numbers[left] = b[k];
-			k++;
+			index -= half / 2;
 		}
+		prevIndex = index;
+		half /= 2;
+	}
+	array.insert(array.begin() + index, numToInsert);
+}
+
+/*	Creates a new sorted array combining two arrays	*/
+
+static void	andConquer(std::vector<int>& array1, std::vector<int>& array2, std::vector<int>& insertInto)
+{
+	size_t	index1 = 0;
+	size_t	index2 = 0;
+	size_t	size1 = array1.size();
+	size_t	size2 = array2.size();
+
+	insertInto.clear();
+	while (index1 < size1 && index2 < size2)
+	{
+		if (array1[index1] < array2[index2])
+		{
+			insertInto.push_back(array1[index1]);
+			index1++;
+		}
+		else
+		{
+			insertInto.push_back(array2[index2]);
+			index2++;
+		}
+	}
+	while (index1 < size1)
+	{
+		insertInto.push_back(array1[index1]);
+		index1++;
+	}
+	while (index2 < size2)
+	{
+		insertInto.push_back(array2[index2]);
+		index2++;
 	}
 }
 
-void	divideInHalf(std::vector<int>& numbers, size_t left, size_t right)
-{
-	int middle = (left + right) / 2;
+/*	Recursively divides the array in half until size is 1 (therefore sorted)	*/
 
-	if (left >= right)
+static void	divide(std::vector<int>& numnumnum)
+{
+	if (numnumnum.size() <= 1)
+	{
 		return ;
-	divideInHalf(numbers, left, middle);
-	divideInHalf(numbers, middle + 1, right);
-	mergeBack(numbers, left, middle, right);
+	}
+	std::vector<int>	array1;
+	std::vector<int>	array2;
+	size_t				half = numnumnum.size() / 2;
+
+	array1.reserve(half);
+	array2.reserve(half);
+	array1.insert(array1.begin(), numnumnum.begin(), numnumnum.begin() + half);
+	array2.insert(array2.begin(), numnumnum.begin() + half, numnumnum.end());
+	divide(array1);
+	divide(array2);
+	andConquer(array1, array2, numnumnum);
+}
+
+static std::vector<int>	insertLowerHalf(std::vector<int>& small, std::vector<int>& large)
+{
+	const std::vector<size_t>	jacobsthalSequence = calculateJacobsthalSequence();
+
+	std::vector<int>	result = large;
+	size_t				index = 3, prevIndex = 1;
+	int					seqIndex = 3;
+
+	binarySearchAndInsert(result, small[0], result.size() - 1);
+	binarySearchAndInsert(result, small[1], result.size() - 1);
+	while (prevIndex != index)
+	{
+		while (index > jacobsthalSequence[prevIndex])
+		{
+			binarySearchAndInsert(result, small[index], result.size() - 1);
+			index--;
+		}
+		prevIndex = std::min(jacobsthalSequence[seqIndex], small.size() - 1);
+		seqIndex++;
+		index = std::min(jacobsthalSequence[seqIndex], small.size() - 1);
+	}
+	return (result);
 }
 
 void	FreddyJohnnyVector(std::vector<int>& numbers)
 {
-	std::vector<int>	a;
-	std::vector<int>	b;
-	size_t				halfIndex = numbers.size() / 2;
+	std::vector<int>	smallNumbers;
+	std::vector<int>	largeNumbers;
+	std::vector<int>	result;
 
-	for (size_t i = 0; i < halfIndex; i++)
+	result.reserve(numbers.size());
+
+	for (size_t i = 0; i < numbers.size() - 1; i += 2)
 	{
-		a.push_back(std::min(numbers[i], numbers[halfIndex + i]));
-		b.push_back(std::max(numbers[i], numbers[halfIndex + i]));
+		smallNumbers.push_back(std::min(numbers[i], numbers[i + 1]));
+		largeNumbers.push_back(std::max(numbers[i], numbers[i + 1]));
 	}
-	divideInHalf(b, 0, halfIndex);
-	printArray(b);
+	printArray(smallNumbers);
+	printArray(largeNumbers);
+	divide(largeNumbers);
+	result = insertLowerHalf(smallNumbers, largeNumbers);
+	if (numbers.size() % 2 != 0)
+	{
+		binarySearchAndInsert(result, numbers.back(), numbers.size() - 1);
+	}
+	numbers = result;
+	printArray(numbers);
 }
