@@ -3,6 +3,7 @@ RM		=	rm -rf
 CC		=	c++
 CFLAGS	=	-Wall -Werror -Wextra -std=c++20 #-g -fsanitize=address
 SRCS	=	main.cpp \
+			RPN.cpp \
 
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	=	objects
