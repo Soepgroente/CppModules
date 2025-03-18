@@ -1,6 +1,10 @@
 #include "PmergeMe.hpp"
 
+#ifdef __APPLE__
+using Stopwatch = std::chrono::time_point<std::chrono::high_resolution_clock>;
+#elif defined(__linux__)
 using Stopwatch = std::chrono::_V2::system_clock::time_point;
+#endif
 
 static std::time_t	duration(Stopwatch begin, Stopwatch end)
 {
@@ -31,8 +35,8 @@ void sortInASillyWay(std::vector<int>& vector, std::deque<int>& deque)
 	std::vector<int> vectorCopy = vector;
 	std::deque<int> dequeCopy = deque;
 
-	// callSortingAlgorithm("std::sort on vector: ", [](std::vector<int>& vec) { std::sort(vec.begin(), vec.end()); }, vectorCopy);
-	// callSortingAlgorithm("std::sort on deque: ", [](std::deque<int>& deq) { std::sort(deq.begin(), deq.end()); }, dequeCopy);
-	callSortingAlgorithm("Fred-Johnson on vector: ", FreddyJohnnyVector, vector);
-	// callSortingAlgorithm("Fred-Johnson on deque: ", FreddyJohnnyDeque<std::deque<int>>, deque);
+	callSortingAlgorithm("std::sort on vector: ", [](std::vector<int>& vec) { std::sort(vec.begin(), vec.end()); }, vectorCopy);
+	callSortingAlgorithm("std::sort on deque: ", [](std::deque<int>& deq) { std::sort(deq.begin(), deq.end()); }, dequeCopy);
+	callSortingAlgorithm("Fred-Johnson on vector: ", FordJohnnyVector, vector);
+	callSortingAlgorithm("Fred-Johnson on deque: ", FordJohnnyDeque, deque);
 }

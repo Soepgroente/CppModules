@@ -1,143 +1,149 @@
 #include "PmergeMe.hpp"
 
-/*	Step 1: Group the elements of into n / 2 pairs of elements, arbitrarily, 
-	leaving one element unpaired if there is an odd number of elements. */
-
-/*	Step 2: Perform comparisons, one per pair, to determine the larger of the two elements in each pair.	*/
-
-/*	Step 3: Recursively sort the larger elements from each pair, 
-	creating a sorted sequence of the input elements, 
-	in ascending order, using the merge-insertion sort.	*/
-
-/*	Step 4: Insert at the start of S the element that was paired with the first and smallest element of S	*/
-
-/*	Step 5: Insert the remaining elements of S into S, 
-	one at a time, with a specially chosen insertion ordering described below. 
-	Use binary search in subsequences of S (as described below) to determine the position at which each element should be inserted.	*/
-
-static void	binarySearchAndInsert(std::vector<int>& array, int numToInsert, size_t end)
+static void	binarySearchAndInsert(std::vector<int>& array, int numToInsert, size_t left, size_t right)
 {
-	size_t	half = array.size() / 2;
-	size_t	index = half;
-	size_t	prevIndex = half;
+	size_t	middle = left + (right - left) / 2;
 
-	while (half > 0 && numToInsert != array[index])
+	while (left < right)
 	{
-		if (numToInsert > array[index])
+		if (numToInsert > array[middle])
 		{
-			index += half / 2;
+			left = middle + 1;
 		}
 		else
 		{
-			index -= half / 2;
+			right = middle;
 		}
-		prevIndex = index;
-		half /= 2;
+		middle = left + (right - left) / 2;
 	}
-	array.insert(array.begin() + index, numToInsert);
+	array.insert(array.begin() + left, numToInsert);
 }
 
-/*	Creates a new sorted array combining two arrays	*/
-
-static void	andConquer(std::vector<int>& array1, std::vector<int>& array2, std::vector<int>& insertInto)
+static void	andConquer
+(
+	std::vector<std::pair<int, int>>& pair1, 
+	std::vector<std::pair<int, int>>& pair2, 
+	std::vector<std::pair<int, int>>& insertInto
+)
 {
 	size_t	index1 = 0;
 	size_t	index2 = 0;
-	size_t	size1 = array1.size();
-	size_t	size2 = array2.size();
+	size_t	size1 = pair1.size();
+	size_t	size2 = pair2.size();
 
 	insertInto.clear();
 	while (index1 < size1 && index2 < size2)
 	{
-		if (array1[index1] < array2[index2])
+		if (pair1[index1].second < pair2[index2].second)
 		{
-			insertInto.push_back(array1[index1]);
+			insertInto.push_back(pair1[index1]);
 			index1++;
 		}
 		else
 		{
-			insertInto.push_back(array2[index2]);
+			insertInto.push_back(pair2[index2]);
 			index2++;
 		}
 	}
 	while (index1 < size1)
 	{
-		insertInto.push_back(array1[index1]);
+		insertInto.push_back(pair1[index1]);
 		index1++;
 	}
 	while (index2 < size2)
 	{
-		insertInto.push_back(array2[index2]);
+		insertInto.push_back(pair2[index2]);
 		index2++;
 	}
 }
 
-/*	Recursively divides the array in half until size is 1 (therefore sorted)	*/
-
-static void	divide(std::vector<int>& numnumnum)
+static void	divide(std::vector<std::pair<int, int>>& pairs)
 {
-	if (numnumnum.size() <= 1)
+	if (pairs.size() <= 1)
 	{
 		return ;
 	}
-	std::vector<int>	array1;
-	std::vector<int>	array2;
-	size_t				half = numnumnum.size() / 2;
+	std::vector<std::pair<int, int>>	pairs1, pairs2;
+	size_t	half = pairs.size() / 2;
 
-	array1.reserve(half);
-	array2.reserve(half);
-	array1.insert(array1.begin(), numnumnum.begin(), numnumnum.begin() + half);
-	array2.insert(array2.begin(), numnumnum.begin() + half, numnumnum.end());
-	divide(array1);
-	divide(array2);
-	andConquer(array1, array2, numnumnum);
+	pairs1.reserve(half);
+	pairs2.reserve(half);
+	pairs1.insert(pairs1.begin(), pairs.begin(), pairs.begin() + half);
+	pairs2.insert(pairs2.begin(), pairs.begin() + half, pairs.end());
+	divide(pairs1);
+	divide(pairs2);
+	andConquer(pairs1, pairs2, pairs);
 }
 
-static std::vector<int>	insertLowerHalf(std::vector<int>& small, std::vector<int>& large)
+static std::vector<int>	copyHigherHalf(std::vector<std::pair<int, int>>& pairs)
 {
-	const std::vector<size_t>	jacobsthalSequence = calculateJacobsthalSequence();
+	std::vector<int>	result;
 
-	std::vector<int>	result = large;
-	size_t				index = 3, prevIndex = 1;
-	int					seqIndex = 3;
-
-	binarySearchAndInsert(result, small[0], result.size() - 1);
-	binarySearchAndInsert(result, small[1], result.size() - 1);
-	while (prevIndex != index)
+	result.reserve(pairs.size());
+	for (const std::pair<int, int>& pair : pairs)
 	{
-		while (index > jacobsthalSequence[prevIndex])
-		{
-			binarySearchAndInsert(result, small[index], result.size() - 1);
-			index--;
-		}
-		prevIndex = std::min(jacobsthalSequence[seqIndex], small.size() - 1);
-		seqIndex++;
-		index = std::min(jacobsthalSequence[seqIndex], small.size() - 1);
+		result.push_back(pair.second);
 	}
 	return (result);
 }
 
-void	FreddyJohnnyVector(std::vector<int>& numbers)
+static std::vector<int>	copyLowerHalf(std::vector<std::pair<int, int>>& pairs)
 {
-	std::vector<int>	smallNumbers;
-	std::vector<int>	largeNumbers;
 	std::vector<int>	result;
+
+	result.reserve(pairs.size());
+	for (const std::pair<int, int>& pair : pairs)
+	{
+		result.push_back(pair.first);
+	}
+	return (result);
+}
+
+static std::vector<int>	insertLowerHalf(std::vector<std::pair<int, int>>& pairs)
+{
+	std::vector<int>	result = copyHigherHalf(pairs);
+	std::vector<int> 	toInsert = copyLowerHalf(pairs);
+	size_t				totalSize = pairs.size() * 2;
+	size_t				insertedElements = 0;
+	size_t				index, prevIndex, jacobsthalNumber;
+
+	result.insert(result.begin(), toInsert[0]);
+	insertedElements++;
+	index = 1;
+	prevIndex = 0;
+	binarySearchAndInsert(result, toInsert[1], 0, 2);
+	insertedElements++;
+	while (result.size() < totalSize)
+	{
+		jacobsthalNumber = std::min(prevIndex + 2 * index, toInsert.size() - 1);
+		prevIndex = index;
+		while (jacobsthalNumber > index)
+		{
+			binarySearchAndInsert(result, toInsert[jacobsthalNumber - (jacobsthalNumber - index)], 0, jacobsthalNumber + insertedElements);
+			insertedElements++;
+			index++;
+		}
+	}
+	return (result);
+}
+
+void	FordJohnnyVector(std::vector<int>& numbers)
+{
+	std::vector<std::pair<int, int>>	pairs;
+	std::vector<int>					result;
 
 	result.reserve(numbers.size());
 
 	for (size_t i = 0; i < numbers.size() - 1; i += 2)
 	{
-		smallNumbers.push_back(std::min(numbers[i], numbers[i + 1]));
-		largeNumbers.push_back(std::max(numbers[i], numbers[i + 1]));
+		pairs.push_back({std::min(numbers[i], numbers[i + 1]), \
+						std::max(numbers[i], numbers[i + 1])});
 	}
-	printArray(smallNumbers);
-	printArray(largeNumbers);
-	divide(largeNumbers);
-	result = insertLowerHalf(smallNumbers, largeNumbers);
+	divide(pairs);
+	result = insertLowerHalf(pairs);
 	if (numbers.size() % 2 != 0)
 	{
-		binarySearchAndInsert(result, numbers.back(), numbers.size() - 1);
+		binarySearchAndInsert(result, numbers.back(), 0, numbers.size() - 2);
 	}
 	numbers = result;
-	printArray(numbers);
 }

@@ -11,7 +11,8 @@
 #include <vector>
 
 void	sortInASillyWay(std::vector<int>& vector, std::deque<int>& deque);
-void	FreddyJohnnyVector(std::vector<int>& numbers);
+void	FordJohnnyVector(std::vector<int>& numbers);
+void	FordJohnnyDeque(std::deque<int>& numbers);
 void	compareTwoElements(int& a, int& b);
 
 template <typename Container>
@@ -24,17 +25,15 @@ void printArray(const Container& container)
 	std::cout << std::endl;
 }
 
-constexpr const std::vector<size_t>	calculateJacobsthalSequence()
+template <typename Container>
+size_t	arrayIsSorted(const Container& array)
 {
-	std::vector<size_t>	sequence;
-	size_t				num = 0;
-
-	sequence.push_back(0);
-	sequence.push_back(1);
-	for (size_t n = 2; num < INT_MAX; n++)
+	for (size_t i = 1; i < array.size(); i++)
 	{
-		num = sequence[n - 1] + 2 * sequence[n - 2];
-		sequence.push_back(num);
+		if (array[i - 1] > array[i])
+		{
+			return (i);
+		}
 	}
-	return (sequence);
+	return (0);
 }

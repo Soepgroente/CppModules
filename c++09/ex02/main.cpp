@@ -39,7 +39,9 @@ int main(int argc, char** argv)
 	std::deque<int>		deque;
 
 	if (parse(argc, argv, vector, deque) == false)
+	{
 		return (2);
+	}
 	sortInASillyWay(vector, deque);
 	return (0);
 }
