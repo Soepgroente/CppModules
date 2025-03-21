@@ -111,6 +111,10 @@ static std::vector<int>	insertLowerHalf(std::vector<std::pair<int, int>>& pairs)
 	insertedElements++;
 	index = 1;
 	prevIndex = 0;
+	if (toInsert.size() == 1)
+	{
+		return (result);
+	}
 	binarySearchAndInsert(result, toInsert[1], 0, 2);
 	insertedElements++;
 	while (result.size() < totalSize)
@@ -143,7 +147,7 @@ void	FordJohnnyVector(std::vector<int>& numbers)
 	result = insertLowerHalf(pairs);
 	if (numbers.size() % 2 != 0)
 	{
-		binarySearchAndInsert(result, numbers.back(), 0, numbers.size() - 2);
+		binarySearchAndInsert(result, numbers.back(), 0, numbers.size() - 1);
 	}
 	numbers = result;
 }

@@ -24,9 +24,13 @@ void callSortingAlgorithm(const std::string& message, Func func, Container& cont
 {
     Stopwatch begin, end;
 
+	std::cout << "Before:\t";
+	printArray(container);
     begin = std::chrono::high_resolution_clock::now();
     func(container);
     end = std::chrono::high_resolution_clock::now();
+	std::cout << "After:\t";
+	printArray(container);
     std::cout << message << duration(begin, end) << "μs" << std::endl;
 }
 
